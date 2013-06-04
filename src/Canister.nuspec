@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Canister</id>
+    <title>Canister</title>
+    <version>0.0.1</version>
+    <authors>Cameron Fletcher 
+Canister contributors</authors>
+    <projectUrl>https://github.com/canister/canister/wiki</projectUrl>
+    <iconUrl>http://nuget.cameronfletcher.com/icons/canister.png</iconUrl>
+    <licenseUrl>https://raw.github.com/canister/canister/master/LICENSE.mit.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Canister.</description>
+    <releaseNotes>TBD</releaseNotes>
+    <copyright>Copyright (c) Canister contributors.</copyright>
+    <tags>container canister ioc dependency injection</tags>
+  </metadata>
+  <files>
+  </files>
+</package>

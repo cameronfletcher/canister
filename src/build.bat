@@ -1,0 +1,1 @@
+@msbuild Canister.msbuild /t:Build;Test;Package
