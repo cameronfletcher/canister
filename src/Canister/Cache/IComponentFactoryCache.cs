@@ -8,6 +8,6 @@
 
         void SetComponentFactory(object componentKey, Func<IComponentResolver, object> componentFactory);
 
-        void Clear();
+        //void Clear();
     }
 }

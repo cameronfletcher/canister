@@ -28,7 +28,7 @@ namespace Canister.Tests
 
             // assert
             cache.GetComponentKeys().Length.Should().Be(1);
-            cache.GetComponentKeys().Should().Contain(event1.OriginalComponentKey);
+            cache.GetComponentKeys().Should().Contain(event1.ComponentKey);
         }
 
         [Fact]

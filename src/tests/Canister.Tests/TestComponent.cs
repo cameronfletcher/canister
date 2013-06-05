@@ -19,13 +19,31 @@ namespace Canister.Tests
 
     public class DoStuff : IDoStuff
     {
+        public DoStuff(string value = null)
+        {
+            this.Value = value;
+        }
+
+        public string Value { get; set; }
     }
 
     public class DoOtherStuff : IDoOtherStuff
     {
+        public DoOtherStuff(string value = null)
+        {
+            this.Value = value;
+        }
+
+        public string Value { get; set; }
     }
 
     public class DoEverything : IDoStuff, IDoOtherStuff
     {
+        public DoEverything(string value = null)
+        {
+            this.Value = value;
+        }
+
+        public string Value { get; set; }
     }
 }

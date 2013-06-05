@@ -22,7 +22,7 @@
         {
             Guard.Against.Null(() => @event);
 
-            this.componentKeyMappings.Add(@event.ComponentRegistrationId, new[] { @event.OriginalComponentKey });
+            this.componentKeyMappings.Add(@event.ComponentRegistrationId, new[] { @event.ComponentKey });
             this.cache.SetComponentKeys(GetAllComponentKeys(this.componentKeyMappings));
         }
 

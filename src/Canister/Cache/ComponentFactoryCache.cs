@@ -19,9 +19,9 @@
             this.typeFactories[componentKey] = componentFactory;
         }
 
-        public void Clear()
-        {
-            this.typeFactories.Clear();
-        }
+        //public void Clear()
+        //{
+        //    this.typeFactories.Clear();
+        //}
     }
 }

@@ -26,7 +26,7 @@
         {
             this.componentRegistrationIds.Add(@event.ComponentRegistrationId);
             this.componentFactories.Add(@event.ComponentRegistrationId, @event.ComponentFactory);
-            this.componentKeyMappings.Add(@event.ComponentRegistrationId, new[] { @event.OriginalComponentKey });
+            this.componentKeyMappings.Add(@event.ComponentRegistrationId, new[] { @event.ComponentKey });
             this.RebuildTypeFactories();
         }
 
