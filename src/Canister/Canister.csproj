@@ -60,6 +60,7 @@
     <Compile Include="Events\ComponentKeysAssigned.cs" />
     <Compile Include="Events\ExistingRegistrationsPreserved.cs" />
     <Compile Include="IComponentResolver.cs" />
+    <Compile Include="Model\Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Component.cs" />
     <Compile Include="Views\ComponentKeysView.cs" />
