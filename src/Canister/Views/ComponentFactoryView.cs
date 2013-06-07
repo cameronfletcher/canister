@@ -28,13 +28,12 @@
                 @event.ComponentRegistrationId,
                 new Component
                 {
-                    RegistrationId = @event.ComponentRegistrationId,
+                    RegistrationCount = componentRegistrationCount++,
                     Keys = new[] { @event.ComponentKey },
                     Factory = @event.ComponentFactory,
-                    RegistrationCount = componentRegistrationCount++
                 });
 
-            this.RebuildCache(@event.ComponentKey);
+            this.RebuildCache(new object[] { @event.ComponentKey });
         }
 
         public void Handle(ComponentKeysAssigned @event)
@@ -42,11 +41,11 @@
             Guard.Against.Null(() => @event);
 
             var component = this.components[@event.ComponentRegistrationId];
-            var componentKeys = component.Keys;
+            var affectedComponentKeys = component.Keys.Union(@event.ComponentKeys).ToArray();
 
             component.Keys = @event.ComponentKeys;
 
-            this.RebuildCache(component.Keys.Union(componentKeys));
+            this.RebuildCache(affectedComponentKeys);
         }
 
         public void Handle(ExistingRegistrationsPreserved @event)
@@ -54,12 +53,13 @@
             Guard.Against.Null(() => @event);
 
             var component = this.components[@event.ComponentRegistrationId];
+            
             component.PreserveRegistrations = true;
 
             this.RebuildCache(component.Keys);
         }
 
-        private void RebuildCache(params object[] componentKeys)
+        private void RebuildCache(object[] componentKeys)
         {
             foreach (var componentKey in componentKeys)
             {
@@ -68,24 +68,10 @@
                     .OrderBy(component => component.PreserveRegistrations)
                     .ThenByDescending(component => component.RegistrationCount)
                     .Select(component => component.Factory)
-                    .Take(1)
-                    .SingleOrDefault();
+                    .FirstOrDefault();
 
                 this.cache.SetComponentFactory(componentKey, componentFactory);
             }
-        }
-
-        private class Component
-        {
-            public Guid RegistrationId { get; set; }
-
-            public int RegistrationCount { get; set; }
-
-            public object[] Keys { get; set; }
-
-            public Func<IComponentResolver, object> Factory { get; set; }
-
-            public bool PreserveRegistrations { get; set; }
         }
     }
 }

@@ -8,61 +8,69 @@
 
     public class ComponentFactoriesView
     {
-        private readonly Dictionary<Guid, Func<IComponentResolver, object>> componentFactories;
-        private readonly Dictionary<Guid, object[]> componentKeyMappings;
-        private readonly List<Guid> componentRegistrationIds;
+        private readonly Dictionary<Guid, Component> components = new Dictionary<Guid, Component>();
         private readonly IComponentFactoriesCache cache;
+
+        private int componentRegistrationCount;
 
         public ComponentFactoriesView(IComponentFactoriesCache cache)
         {
-            this.componentFactories = new Dictionary<Guid, Func<IComponentResolver, object>>();
-            this.componentKeyMappings = new Dictionary<Guid, object[]>();
-            this.componentRegistrationIds = new List<Guid>();
+            Guard.Against.Null(() => cache);
 
             this.cache = cache;
         }
 
         public void Handle(ComponentRegistered @event)
         {
-            this.componentRegistrationIds.Add(@event.ComponentRegistrationId);
-            this.componentFactories.Add(@event.ComponentRegistrationId, @event.ComponentFactory);
-            this.componentKeyMappings.Add(@event.ComponentRegistrationId, new[] { @event.ComponentKey });
-            this.RebuildTypeFactories();
+            Guard.Against.Null(() => @event);
+
+            this.components.Add(
+                @event.ComponentRegistrationId,
+                new Component
+                {
+                    RegistrationCount = componentRegistrationCount++,
+                    Keys = new[] { @event.ComponentKey },
+                    Factory = @event.ComponentFactory,
+                });
+
+            this.RebuildCache(new object[] { @event.ComponentKey });
         }
 
         public void Handle(ComponentKeysAssigned @event)
         {
-            this.componentKeyMappings[@event.ComponentRegistrationId] = @event.ComponentKeys;
-            this.RebuildTypeFactories();
+            Guard.Against.Null(() => @event);
+
+            var component = this.components[@event.ComponentRegistrationId];
+            var affectedComponentKeys = component.Keys.Union(@event.ComponentKeys).ToArray();
+
+            component.Keys = @event.ComponentKeys;
+
+            this.RebuildCache(affectedComponentKeys);
         }
 
-        private void RebuildTypeFactories()
+        public void Handle(ExistingRegistrationsPreserved @event)
         {
-            this.cache.Clear();
+            Guard.Against.Null(() => @event);
 
-            var allTypeFactories = new Dictionary<object, List<Func<IComponentResolver, object>>>();
+            var component = this.components[@event.ComponentRegistrationId];
 
-            // TODO (Cameron): This could be made more efficient. Probably with a group by statement.
-            foreach (var component in this.componentKeyMappings
-                .SelectMany(
-                    map => map.Value,
-                    (dictionary, type) =>
-                    new
-                    {
-                        RegistrationId = dictionary.Key,
-                        Type = type,
-                        Factory = this.componentFactories[dictionary.Key],
-                        Order = this.componentRegistrationIds.IndexOf(dictionary.Key)
-                    })
-                .OrderBy(component => component.Order))
+            component.PreserveRegistrations = true;
+
+            this.RebuildCache(component.Keys);
+        }
+
+        private void RebuildCache(object[] componentKeys)
+        {
+            foreach (var componentKey in componentKeys)
             {
-                var factories = allTypeFactories.ContainsKey(component.Type) 
-                    ? allTypeFactories[component.Type] 
-                    : new List<Func<IComponentResolver, object>>();
+                var componentFactories = this.components.Values
+                    .Where(component => component.Keys.Contains(componentKey))
+                    .OrderBy(component => component.PreserveRegistrations)
+                    .ThenByDescending(component => component.RegistrationCount)
+                    .Select(component => component.Factory)
+                    .ToArray();
 
-                factories.Add(component.Factory);
-
-                allTypeFactories[component.Type] = factories;
+                this.cache.SetComponentFactories(componentKey, componentFactories);
             }
         }
     }
