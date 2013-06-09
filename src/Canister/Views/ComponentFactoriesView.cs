@@ -6,7 +6,7 @@
     using Canister.Cache;
     using Canister.Events;
 
-    public class ComponentFactoriesView
+    public sealed class ComponentFactoriesView
     {
         private readonly Dictionary<Guid, Component> components = new Dictionary<Guid, Component>();
         private readonly IComponentFactoriesCache cache;
@@ -33,7 +33,7 @@
                     Factory = @event.ComponentFactory,
                 });
 
-            this.RebuildCache(new object[] { @event.ComponentKey });
+            this.RebuildCache(new[] { @event.ComponentKey });
         }
 
         public void Handle(ComponentKeysAssigned @event)
@@ -41,11 +41,11 @@
             Guard.Against.Null(() => @event);
 
             var component = this.components[@event.ComponentRegistrationId];
-            var affectedComponentKeys = component.Keys.Union(@event.ComponentKeys).ToArray();
+            var existingComponentKeys = component.Keys;
 
             component.Keys = @event.ComponentKeys;
 
-            this.RebuildCache(affectedComponentKeys);
+            this.RebuildCache(existingComponentKeys.Union(@event.ComponentKeys).ToArray());
         }
 
         public void Handle(ExistingRegistrationsPreserved @event)
@@ -63,15 +63,19 @@
         {
             foreach (var componentKey in componentKeys)
             {
-                var componentFactories = this.components.Values
-                    .Where(component => component.Keys.Contains(componentKey))
-                    .OrderBy(component => component.PreserveRegistrations)
-                    .ThenByDescending(component => component.RegistrationCount)
-                    .Select(component => component.Factory)
-                    .ToArray();
-
+                var componentFactories = this.GetComponentFactories(componentKey);
                 this.cache.SetComponentFactories(componentKey, componentFactories);
             }
+        }
+
+        private Func<IComponentResolver, object> GetComponentFactories(object componentKey)
+        {
+            return this.components.Values
+                .Where(component => component.Keys.Contains(componentKey))
+                .OrderBy(component => component.PreserveRegistrations)
+                .ThenByDescending(component => component.RegistrationCount)
+                .Select(component => component.Factory)
+                .FirstOrDefault();
         }
     }
 }
