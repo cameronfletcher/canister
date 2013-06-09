@@ -6,7 +6,7 @@
     using Canister.Cache;
     using Canister.Events;
 
-    public sealed class ComponentFactoriesView
+    public class ComponentFactoriesView
     {
         private readonly Dictionary<Guid, Component> components = new Dictionary<Guid, Component>();
         private readonly IComponentFactoriesCache cache;
@@ -68,14 +68,14 @@
             }
         }
 
-        private Func<IComponentResolver, object> GetComponentFactories(object componentKey)
+        private Func<IComponentResolver, object>[] GetComponentFactories(object componentKey)
         {
             return this.components.Values
                 .Where(component => component.Keys.Contains(componentKey))
                 .OrderBy(component => component.PreserveRegistrations)
                 .ThenByDescending(component => component.RegistrationCount)
                 .Select(component => component.Factory)
-                .FirstOrDefault();
+                .ToArray();
         }
     }
 }

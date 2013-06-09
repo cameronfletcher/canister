@@ -1,0 +1,9 @@
+﻿namespace Canister
+{
+    using System;
+
+    public interface IContainer : IComponentResolver
+    {
+        IComponentRegistration Register<T>(Func<IComponentResolver, T> componentFactory) where T : class;
+    }
+}

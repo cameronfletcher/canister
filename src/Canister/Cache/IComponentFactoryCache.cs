@@ -7,7 +7,5 @@
         Func<IComponentResolver, object> GetComponentFactory(object componentKey);
 
         void SetComponentFactory(object componentKey, Func<IComponentResolver, object> componentFactory);
-
-        //void Clear();
     }
 }
