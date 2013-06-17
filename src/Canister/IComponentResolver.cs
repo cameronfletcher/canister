@@ -1,4 +1,8 @@
-﻿namespace Canister
+﻿// <copyright file="IComponentResolver.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister
 {
     using System.Collections.Generic;
 

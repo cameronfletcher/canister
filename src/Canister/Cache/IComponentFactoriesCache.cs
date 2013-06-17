@@ -1,4 +1,8 @@
-﻿namespace Canister.Cache
+﻿// <copyright file="IComponentFactoriesCache.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Cache
 {
     using System;
 

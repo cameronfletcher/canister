@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1636:FileHeaderCopyrightTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1641:FileHeaderCompanyNameTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
@@ -20,118 +19,25 @@ using System.Runtime.CompilerServices;
 /// <summary>
 /// Provides extension methods for the <see cref="Guard"/> clause.
 /// </summary>
-[ExcludeFromCodeCoverage]
 internal static class GuardExtensions
 {
-    /// <summary>
-    /// Guard against null argument values.
-    /// </summary>
-    /// <typeparam name="T">The type of value to guard against.</typeparam>
-    /// <param name="guard">The guard clause.</param>
-    /// <param name="value">The value to guard against.</param>
-    /// <param name="parameterName">Name of the parameter.</param>
-    [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
-    [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
-    public static void Null<T>(this Guard guard, T value, string parameterName)
-        where T : class
-    {
-        Guard.Against.Null(() => parameterName);
-
-        if (value == null)
-        {
-            throw new ArgumentNullException(parameterName, "Value cannot be empty.");
-        }
-    }
-
-    /// <summary>
-    /// Guard against null argument values.
-    /// </summary>
-    /// <typeparam name="T">The type of value to guard against.</typeparam>
-    /// <param name="guard">The guard clause.</param>
-    /// <param name="value">The value to guard against.</param>
-    /// <param name="parameterName">Name of the parameter.</param>
-    /// <param name="propertyName">Name of the property.</param>
-    [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
-    [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
-    public static void Null<T>(this Guard guard, T value, string parameterName, string propertyName)
-        where T : class
-    {
-        Guard.Against.Null(() => parameterName);
-        Guard.Against.Null(() => propertyName);
-
-        if (value == null)
-        {
-            throw new ArgumentException("Value cannot be empty.", string.Concat(parameterName, ".", propertyName));
-        }
-    }
-
-    /// <summary>
-    /// Guard against null argument values.
-    /// </summary>
-    /// <typeparam name="T">The type of value to guard against.</typeparam>
-    /// <param name="guard">The guard clause.</param>
-    /// <param name="value">The value to guard against.</param>
-    /// <param name="parameterName">Name of the parameter.</param>
-    [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
-    [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
-    public static void Null<T>(this Guard guard, T? value, string parameterName)
-        where T : struct
-    {
-        Guard.Against.Null(() => parameterName);
-
-        if (!value.HasValue)
-        {
-            throw new ArgumentNullException(parameterName, "Value cannot be empty.");
-        }
-    }
-
-    /// <summary>
-    /// Guard against null argument values.
-    /// </summary>
-    /// <typeparam name="T">The type of value to guard against.</typeparam>
-    /// <param name="guard">The guard clause.</param>
-    /// <param name="value">The value to guard against.</param>
-    /// <param name="parameterName">Name of the parameter.</param>
-    /// <param name="propertyName">Name of the property.</param>
-    [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
-    [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
-    public static void Null<T>(this Guard guard, T? value, string parameterName, string propertyName)
-        where T : struct
-    {
-        Guard.Against.Null(() => parameterName);
-        Guard.Against.Null(() => propertyName);
-
-        if (!value.HasValue)
-        {
-            throw new ArgumentException("Value cannot be empty.", string.Concat(parameterName, ".", propertyName));
-        }
-    }
-
     /// <summary>
     /// Guard against null or empty argument values.
     /// </summary>
     /// <typeparam name="T">The type of value to guard against.</typeparam>
-    /// <param name="guard">The guard clause.</param>
+    /// <param name="guard">The Guard clause.</param>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Obsolete("This method is not fully supported in portable class libraries. Consider using Guard.Against.NullOrEmpty(value, parameterName) instead.")]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmpty<T>(this Guard guard, Func<IEnumerable<T>> expression)
     {
-        Guard.Against.Null(expression);
+        Guard.Against.Null(expression, "expression");
 
         if (!expression().Any())
         {
-            throw new ArgumentException("Value cannot be empty.", Guard.Expression.Parse(expression));
+            throw new ArgumentException("Value cannot be empty.");
         }
     }
 
@@ -143,7 +49,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmpty<T>(this Guard guard, IEnumerable<T> value, string parameterName)
@@ -164,7 +69,7 @@ internal static class GuardExtensions
     /// <param name="guard">The guard clause.</param>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Obsolete("This method is not fully supported in portable class libraries. Consider using Guard.Against.NullOrEmptyOrNullElements(value, parameterName) instead.")]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, Func<IEnumerable<T>> expression)
@@ -174,7 +79,7 @@ internal static class GuardExtensions
 
         if (expression().Any(element => element == null))
         {
-            throw new ArgumentException("Value cannot contain null elements.", Guard.Expression.Parse(expression));
+            throw new ArgumentException("Value cannot contain null elements.");
         }
     }
 
@@ -185,7 +90,7 @@ internal static class GuardExtensions
     /// <param name="guard">The guard clause.</param>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Obsolete("This method is not fully supported in portable class libraries. Consider using Guard.Against.NullOrEmptyOrNullElements(value, parameterName) instead.")]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, Func<IEnumerable<T?>> expression)
@@ -195,7 +100,7 @@ internal static class GuardExtensions
 
         if (expression().Any(element => !element.HasValue))
         {
-            throw new ArgumentException("Value cannot contain null elements.", Guard.Expression.Parse(expression));
+            throw new ArgumentException("Value cannot contain null elements.");
         }
     }
 
@@ -207,7 +112,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, IEnumerable<T> value, string parameterName)
@@ -229,7 +133,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, IEnumerable<T?> value, string parameterName)

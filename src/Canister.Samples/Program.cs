@@ -26,7 +26,7 @@
             bus.Register<ExistingRegistrationsPreserved>(message => factoriesView.Handle(message));
 
             var resolver = new ComponentResolver(factoryCache, factoriesCache);
-            var container = new Container(bus, resolver);
+            var container = new ContainerBase(bus, resolver);
 
             container.Register(e => new Thing()).As(new[] { "new Thing" }).PreserveExistingRegistrations();
 

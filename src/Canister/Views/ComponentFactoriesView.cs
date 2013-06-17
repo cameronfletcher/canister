@@ -1,4 +1,8 @@
-﻿namespace Canister.Views
+﻿// <copyright file="ComponentFactoriesView.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Views
 {
     using System;
     using System.Collections.Generic;
@@ -28,7 +32,7 @@
                 @event.ComponentRegistrationId,
                 new Component
                 {
-                    RegistrationCount = componentRegistrationCount++,
+                    RegistrationCount = this.componentRegistrationCount++,
                     Keys = new[] { @event.ComponentKey },
                     Factory = @event.ComponentFactory,
                 });

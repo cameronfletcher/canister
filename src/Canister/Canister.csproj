@@ -55,7 +55,9 @@
     <Compile Include="Commands\PreserveExistingRegistrations.cs" />
     <Compile Include="Commands\RegisterComponent.cs" />
     <Compile Include="ComponentResolver.cs" />
+    <Compile Include="ComponentResolverException.cs" />
     <Compile Include="Extensions\ComponentResolverExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="GuardExtensions.cs" />
     <Compile Include="IComponentLifetime.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="IComponentResolver.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="Model\ComponentRegistration.cs" />
-    <Compile Include="Model\Container.cs" />
+    <Compile Include="Model\ContainerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurnkeyBus.cs" />
     <Compile Include="Views\Component.cs" />

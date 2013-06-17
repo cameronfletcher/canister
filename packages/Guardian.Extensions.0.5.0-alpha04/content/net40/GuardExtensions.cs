@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1636:FileHeaderCopyrightTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1641:FileHeaderCompanyNameTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
@@ -31,7 +30,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void Null<T>(this Guard guard, T value, string parameterName)
@@ -54,7 +52,6 @@ internal static class GuardExtensions
     /// <param name="parameterName">Name of the parameter.</param>
     /// <param name="propertyName">Name of the property.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void Null<T>(this Guard guard, T value, string parameterName, string propertyName)
@@ -77,7 +74,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void Null<T>(this Guard guard, T? value, string parameterName)
@@ -100,7 +96,6 @@ internal static class GuardExtensions
     /// <param name="parameterName">Name of the parameter.</param>
     /// <param name="propertyName">Name of the property.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void Null<T>(this Guard guard, T? value, string parameterName, string propertyName)
@@ -122,7 +117,6 @@ internal static class GuardExtensions
     /// <param name="guard">The guard clause.</param>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmpty<T>(this Guard guard, Func<IEnumerable<T>> expression)
@@ -143,7 +137,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmpty<T>(this Guard guard, IEnumerable<T> value, string parameterName)
@@ -164,7 +157,6 @@ internal static class GuardExtensions
     /// <param name="guard">The guard clause.</param>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, Func<IEnumerable<T>> expression)
@@ -185,7 +177,6 @@ internal static class GuardExtensions
     /// <param name="guard">The guard clause.</param>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, Func<IEnumerable<T?>> expression)
@@ -207,7 +198,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, IEnumerable<T> value, string parameterName)
@@ -229,7 +219,6 @@ internal static class GuardExtensions
     /// <param name="value">The value to guard against.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "guard", Justification = "By design.")]
     public static void NullOrEmptyOrNullElements<T>(this Guard guard, IEnumerable<T?> value, string parameterName)

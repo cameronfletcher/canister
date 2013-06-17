@@ -1,4 +1,8 @@
-﻿namespace Canister.Model
+﻿// <copyright file="ComponentRegistration.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Model
 {
     using System;
     using Canister.Events;
@@ -20,16 +24,14 @@
         {
             Guard.Against.NullOrEmpty(() => componentKeys);
 
-            var @event = new ComponentKeysAssigned(this.id, componentKeys);
-            this.bus.Send(@event);
+            this.bus.Send(new ComponentKeysAssigned(this.id, componentKeys));
 
             return this;
         }
 
         public IComponentRegistration PreserveExistingRegistrations()
         {
-            var @event = new ExistingRegistrationsPreserved(this.id);
-            this.bus.Send(@event);
+            this.bus.Send(new ExistingRegistrationsPreserved(this.id));
 
             return this;
         }

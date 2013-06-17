@@ -1,4 +1,8 @@
-﻿namespace Canister.Commands
+﻿// <copyright file="RegisterComponent.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Commands
 {
     using System;
 
@@ -6,7 +10,7 @@
     {
         public Guid ComponentRegistrationId { get; set; }
 
-        public object ComponentKey { get; private set; }
+        public object ComponentKey { get; set; }
 
         public Func<IComponentResolver, object> ComponentFactory { get; set; }
     }

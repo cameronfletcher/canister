@@ -1,4 +1,8 @@
-﻿namespace Canister
+﻿// <copyright file="ComponentResolver.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister
 {
     using System;
     using System.Collections.Generic;
@@ -27,8 +31,8 @@
             var componentFactory = this.componentFactoryCache.GetComponentFactory(componentKey);
             if (componentFactory == null)
             {
-                // hmm - no such component
-                throw new Exception();
+                // TODO (Cameron): Not very descriptive.
+                throw new ComponentResolverException("Cannot resolve component.");
             }
 
             return componentFactory.Invoke(this);
@@ -41,8 +45,8 @@
             var componentFactories = this.componentFactoriesCache.GetComponentFactories(componentKey);
             if (componentFactories == null)
             {
-                // hmm - no such component
-                throw new Exception();
+                // TODO (Cameron): Not very descriptive.
+                throw new ComponentResolverException("Cannot resolve component.");
             }
 
             return componentFactories.Select(componentFactory => componentFactory.Invoke(this));

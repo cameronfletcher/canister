@@ -10,11 +10,12 @@ Canister contributors</authors>
     <iconUrl>http://nuget.cameronfletcher.com/icons/canister.png</iconUrl>
     <licenseUrl>https://raw.github.com/canister/canister/master/LICENSE.mit.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Canister.</description>
+    <description>An IoC container for .NET</description>
     <releaseNotes>TBD</releaseNotes>
     <copyright>Copyright (c) Canister contributors.</copyright>
     <tags>container canister ioc dependency injection</tags>
   </metadata>
   <files>
+    <file src="Canister\bin\Release\*.dll" target="lib\net45" />
   </files>
 </package>

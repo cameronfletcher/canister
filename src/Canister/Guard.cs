@@ -98,9 +98,9 @@ internal class Guard
     private static Exception GetException<T>(Func<T> expression)
     {
         var parameterName = expression == null ? "expression" : Expression.Parse(expression);
-        var exceptionType = parameterName == null || !parameterName.Contains(".")
-            ? typeof(ArgumentNullException) 
-            : typeof(ArgumentException);
+        var exceptionType = parameterName == null || parameterName.Contains(".")
+            ? typeof(ArgumentException)
+            : typeof(ArgumentNullException);
 
         return ExceptionFactories[exceptionType].Invoke("Value cannot be null.", parameterName);
     }
@@ -150,7 +150,8 @@ internal class Guard
                 if (il[@byte] == (byte)OpCodes.Ldfld.Value)
                 {
                     var handle = BitConverter.ToInt32(il, @byte + 1);
-                    var member = expression.Target.GetType().Module.ResolveMember(handle);
+                    var targetType = expression.Target.GetType();
+                    var member = targetType.Module.ResolveMember(handle, targetType.GetGenericArguments(), new Type[0]);
                     memberNames.Push(member.Name);
                     continue;
                 }
@@ -158,7 +159,8 @@ internal class Guard
                 if (il[@byte] == (byte)OpCodes.Callvirt.Value || il[@byte] == (byte)OpCodes.Call.Value)
                 {
                     var handle = BitConverter.ToInt32(il, @byte + 1);
-                    var method = expression.Target.GetType().Module.ResolveMethod(handle);
+                    var targetType = expression.Target.GetType();
+                    var method = targetType.Module.ResolveMethod(handle, targetType.GetGenericArguments(), new Type[0]);
                     if (!method.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase))
                     {
                         return null;

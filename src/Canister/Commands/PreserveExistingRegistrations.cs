@@ -1,4 +1,8 @@
-﻿namespace Canister.Commands
+﻿// <copyright file="PreserveExistingRegistrations.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Commands
 {
     using System;
 

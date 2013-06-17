@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1636:FileHeaderCopyrightTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1641:FileHeaderCompanyNameTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
@@ -22,13 +23,14 @@ using System.Reflection.Emit;
 /// <summary>
 /// The <see cref="Guard"/> clause.
 /// </summary>
+[ExcludeFromCodeCoverage]
 internal class Guard
 {
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Private member.")]
     private static readonly Guard Instance = new Guard();
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Private member, also.")]
-    private static readonly Dictionary<Type, Func<string, string, ArgumentException>> ExceptionFactories =
+    private static readonly Dictionary<Type, Func<string, string, ArgumentException>> ExceptionFactories = 
         new Dictionary<Type, Func<string, string, ArgumentException>>
         {
             { typeof(ArgumentException), (message, parameterName) => new ArgumentException(message, parameterName) },
@@ -56,6 +58,7 @@ internal class Guard
     /// <typeparam name="T">The type of value to guard against.</typeparam>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "By design.")]
     public void Null<T>(Func<T> expression)
@@ -75,6 +78,7 @@ internal class Guard
     /// <typeparam name="T">The type of value to guard against.</typeparam>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "By design.")]
     public void Null<T>(Func<T?> expression)
@@ -94,9 +98,9 @@ internal class Guard
     private static Exception GetException<T>(Func<T> expression)
     {
         var parameterName = expression == null ? "expression" : Expression.Parse(expression);
-        var exceptionType = parameterName == null || !parameterName.Contains(".")
-            ? typeof(ArgumentNullException)
-            : typeof(ArgumentException);
+        var exceptionType = parameterName == null || parameterName.Contains(".")
+            ? typeof(ArgumentException)
+            : typeof(ArgumentNullException);
 
         return ExceptionFactories[exceptionType].Invoke("Value cannot be null.", parameterName);
     }
@@ -146,7 +150,8 @@ internal class Guard
                 if (il[@byte] == (byte)OpCodes.Ldfld.Value)
                 {
                     var handle = BitConverter.ToInt32(il, @byte + 1);
-                    var member = expression.Target.GetType().Module.ResolveMember(handle);
+                    var targetType = expression.Target.GetType();
+                    var member = targetType.Module.ResolveMember(handle, targetType.GetGenericArguments(), new Type[0]);
                     memberNames.Push(member.Name);
                     continue;
                 }
@@ -154,7 +159,8 @@ internal class Guard
                 if (il[@byte] == (byte)OpCodes.Callvirt.Value || il[@byte] == (byte)OpCodes.Call.Value)
                 {
                     var handle = BitConverter.ToInt32(il, @byte + 1);
-                    var method = expression.Target.GetType().Module.ResolveMethod(handle);
+                    var targetType = expression.Target.GetType();
+                    var method = targetType.Module.ResolveMethod(handle, targetType.GetGenericArguments(), new Type[0]);
                     if (!method.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase))
                     {
                         return null;
@@ -167,7 +173,7 @@ internal class Guard
                 return null; // unrecognised OpCode
             }
 
-            return string.Join(".", memberNames.Reverse().ToArray());
+            return string.Join(".", memberNames.Reverse());
         }
     }
 }

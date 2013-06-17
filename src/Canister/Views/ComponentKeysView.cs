@@ -1,4 +1,8 @@
-﻿namespace Canister.Views
+﻿// <copyright file="ComponentKeysView.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Views
 {
     using System;
     using System.Collections.Generic;

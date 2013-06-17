@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Guardian.Extensions</id>
+    <version>0.5.0-alpha04</version>
+    <title>Guardian Extensions</title>
+    <authors>Cameron Fletcher 
+Guardian contributors</authors>
+    <owners>Cameron Fletcher 
+Guardian contributors</owners>
+    <licenseUrl>https://raw.github.com/cameronfletcher/guardian/master/LICENSE.mit.txt</licenseUrl>
+    <projectUrl>https://github.com/cameronfletcher/guardian/wiki</projectUrl>
+    <iconUrl>http://nuget.cameronfletcher.com/icons/guardian_extensions.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides extension methods for the Guardian source code package.</description>
+    <releaseNotes>TBD</releaseNotes>
+    <tags>guard clause null arguments guardian extensions</tags>
+    <dependencies>
+      <dependency id="Guardian" version="0.5.0-alpha04" />
+    </dependencies>
+  </metadata>
+</package>
