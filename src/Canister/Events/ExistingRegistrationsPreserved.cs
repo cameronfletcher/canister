@@ -1,4 +1,8 @@
-﻿namespace Canister.Events
+﻿// <copyright file="ExistingRegistrationsPreserved.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Events
 {
     using System;
 

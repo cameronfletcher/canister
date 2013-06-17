@@ -1,4 +1,4 @@
-canister
+Canister
 ========
 
-A CQRS based IoC container for .NET
+An IoC container for .NET
