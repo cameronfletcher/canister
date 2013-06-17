@@ -57,6 +57,7 @@
     <Compile Include="ComponentResolver.cs" />
     <Compile Include="ComponentResolverException.cs" />
     <Compile Include="Extensions\ComponentResolverExtensions.cs" />
+    <Compile Include="Factories\ContainerFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="GuardExtensions.cs" />

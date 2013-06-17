@@ -1,40 +1,27 @@
 ﻿namespace Canister.Samples
 {
-    using Canister.Cache;
-    using Canister.Events;
-    using Canister.Views;
-    using global::Canister.Model;
+    using Canister.Factories;
 
     class Program
     {
         static void Main(string[] args)
         {
-            var bus = new TurnkeyBus();
+            var container = new ContainerFactory().Create();
 
-            var factoryCache = new ComponentFactoryCache();
-            var factoriesCache = new ComponentFactoriesCache();
-
-            var factoryView = new ComponentFactoryView(factoryCache);
-            var factoriesView = new ComponentFactoriesView(factoriesCache);
-
-            bus.Register<ComponentRegistered>(message => factoryView.Handle(message));
-            bus.Register<ComponentKeysAssigned>(message => factoryView.Handle(message));
-            bus.Register<ExistingRegistrationsPreserved>(message => factoryView.Handle(message));
-
-            bus.Register<ComponentRegistered>(message => factoriesView.Handle(message));
-            bus.Register<ComponentKeysAssigned>(message => factoriesView.Handle(message));
-            bus.Register<ExistingRegistrationsPreserved>(message => factoriesView.Handle(message));
-
-            var resolver = new ComponentResolver(factoryCache, factoriesCache);
-            var container = new ContainerBase(bus, resolver);
-
-            container.Register(e => new Thing()).As(new[] { "new Thing" }).PreserveExistingRegistrations();
+            container.Register(e => new Thing { Name = "first" }).As(new object[] { "new Thing", typeof(Thing) });
+            container.Register(e => new Thing { Name = "second" }).As(new object[] { "new Thing", typeof(Thing) }).PreserveExistingRegistrations();
+            container.Register(e => new Thing { Name = "third" }).As(new[] { "new Thing" });
 
             var thing = container.Resolve("new Thing");
+            var things = container.ResolveAll("new Thing");
+
+            var otherThing = container.Resolve(typeof(Thing));
+            var otherThings = container.ResolveAll(typeof(Thing));
         }
     }
 
     public class Thing
     {
+        public string Name { get; set; }
     }
 }
