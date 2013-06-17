@@ -1,5 +1,10 @@
-﻿namespace Canister.Factories
+﻿// <copyright file="ContainerFactory.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Factories
 {
+    using System.Diagnostics.CodeAnalysis;
     using Canister.Cache;
     using Canister.Events;
     using Canister.Model;
@@ -7,6 +12,7 @@
 
     public class ContainerFactory
     {
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "WIP")]
         public IContainer Create()
         {
             var bus = new TurnkeyBus();
