@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{39F195AF-0329-4BAE-98D2-222313774934}</ProjectGuid>
+    <ProjectGuid>{99A9E17E-090C-434C-B909-D0C20040FAF8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Canister</RootNamespace>
-    <AssemblyName>Canister</AssemblyName>
+    <RootNamespace>Canister.Sdk</RootNamespace>
+    <AssemblyName>Canister.Sdk</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,24 +20,21 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>..\Canister.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <StyleCopTreatErrorsAsWarnings>true</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <CodeAnalysisRuleSet>..\Canister.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\Canister.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,37 +43,9 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Cache\ComponentKeyCache.cs" />
-    <Compile Include="Cache\ComponentFactoriesCache.cs" />
-    <Compile Include="Cache\IComponentKeyCache.cs" />
-    <Compile Include="Cache\IComponentFactoriesCache.cs" />
-    <Compile Include="Cache\IComponentFactoryCache.cs" />
-    <Compile Include="Cache\ComponentFactoryCache.cs" />
-    <Compile Include="Commands\PreserveExistingRegistrations.cs" />
-    <Compile Include="Commands\RegisterComponent.cs" />
-    <Compile Include="ComponentResolver.cs" />
-    <Compile Include="ComponentResolverException.cs" />
-    <Compile Include="Extensions\ComponentResolverExtensions.cs" />
-    <Compile Include="Factories\ContainerFactory.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Guard.cs" />
-    <Compile Include="GuardExtensions.cs" />
-    <Compile Include="IComponentLifetime.cs" />
-    <Compile Include="Events\ComponentLifetimeAssigned.cs" />
-    <Compile Include="Events\ComponentRegistered.cs" />
-    <Compile Include="Events\ComponentKeysAssigned.cs" />
-    <Compile Include="Events\ExistingRegistrationsPreserved.cs" />
-    <Compile Include="IComponentRegistration.cs" />
-    <Compile Include="IComponentResolver.cs" />
-    <Compile Include="IContainer.cs" />
-    <Compile Include="Model\ComponentRegistration.cs" />
-    <Compile Include="Model\ContainerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurnkeyBus.cs" />
-    <Compile Include="Views\Component.cs" />
-    <Compile Include="Views\ComponentKeysView.cs" />
-    <Compile Include="Views\ComponentFactoriesView.cs" />
-    <Compile Include="Views\ComponentFactoryView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

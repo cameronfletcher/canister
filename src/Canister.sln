@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AD3B85
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canister.Samples", "Canister.Samples\Canister.Samples.csproj", "{32C048B3-8A33-4C9A-BE1A-BA7C3510DD69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canister.Sdk", "Canister.Sdk\Canister.Sdk.csproj", "{99A9E17E-090C-434C-B909-D0C20040FAF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{32C048B3-8A33-4C9A-BE1A-BA7C3510DD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C048B3-8A33-4C9A-BE1A-BA7C3510DD69}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{32C048B3-8A33-4C9A-BE1A-BA7C3510DD69}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{99A9E17E-090C-434C-B909-D0C20040FAF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A9E17E-090C-434C-B909-D0C20040FAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A9E17E-090C-434C-B909-D0C20040FAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A9E17E-090C-434C-B909-D0C20040FAF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

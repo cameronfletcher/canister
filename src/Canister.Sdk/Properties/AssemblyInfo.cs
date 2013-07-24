@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Canister")]
+[assembly: AssemblyTitle("Canister.Sdk")]
 [assembly: AssemblyDescription("")]
 
 [assembly: ComVisible(false)]
