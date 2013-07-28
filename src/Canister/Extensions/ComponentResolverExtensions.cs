@@ -9,14 +9,14 @@ namespace Canister.Extensions
 
     public static class ComponentResolverExtensions
     {
-        public static T Resolve<T>(this IComponentResolver componentResolver) where T : class
+        public static T Resolve<T>(this IComponentContext componentResolver) where T : class
         {
             Guard.Against.Null(() => componentResolver);
 
             return componentResolver.Resolve(typeof(T)) as T;
         }
 
-        public static IEnumerable<T> ResolveAll<T>(this IComponentResolver componentResolver) where T : class
+        public static IEnumerable<T> ResolveAll<T>(this IComponentContext componentResolver) where T : class
         {
             Guard.Against.Null(() => componentResolver);
 

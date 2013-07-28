@@ -6,8 +6,8 @@ namespace Canister
 {
     using System;
 
-    public interface IContainer : IComponentResolver
+    public interface IContainer : IComponentContext
     {
-        IComponentRegistration Register<T>(Func<IComponentResolver, T> componentFactory) where T : class;
+        IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory) where T : class;
     }
 }

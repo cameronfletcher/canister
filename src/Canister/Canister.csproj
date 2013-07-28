@@ -46,40 +46,29 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Cache\ComponentKeyCache.cs" />
-    <Compile Include="Cache\ComponentFactoriesCache.cs" />
-    <Compile Include="Cache\IComponentKeyCache.cs" />
-    <Compile Include="Cache\IComponentFactoriesCache.cs" />
-    <Compile Include="Cache\IComponentFactoryCache.cs" />
-    <Compile Include="Cache\ComponentFactoryCache.cs" />
-    <Compile Include="Commands\PreserveExistingRegistrations.cs" />
-    <Compile Include="Commands\RegisterComponent.cs" />
-    <Compile Include="ComponentResolver.cs" />
-    <Compile Include="ComponentResolverException.cs" />
+    <Compile Include="BusComponentResolver.cs" />
+    <Compile Include="ComponentContext.cs" />
     <Compile Include="Extensions\ComponentResolverExtensions.cs" />
     <Compile Include="Factories\ContainerFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="GuardExtensions.cs" />
-    <Compile Include="IComponentLifetime.cs" />
-    <Compile Include="Events\ComponentLifetimeAssigned.cs" />
-    <Compile Include="Events\ComponentRegistered.cs" />
-    <Compile Include="Events\ComponentKeysAssigned.cs" />
-    <Compile Include="Events\ExistingRegistrationsPreserved.cs" />
     <Compile Include="IComponentRegistration.cs" />
-    <Compile Include="IComponentResolver.cs" />
+    <Compile Include="IComponentContext.cs" />
     <Compile Include="IContainer.cs" />
-    <Compile Include="Model\ComponentRegistration.cs" />
-    <Compile Include="Model\ContainerBase.cs" />
+    <Compile Include="ComponentRegistration.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Model\CustomComponentRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurnkeyBus.cs" />
-    <Compile Include="Views\Component.cs" />
-    <Compile Include="Views\ComponentKeysView.cs" />
-    <Compile Include="Views\ComponentFactoriesView.cs" />
-    <Compile Include="Views\ComponentFactoryView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Canister.Sdk\Canister.Sdk.csproj">
+      <Project>{99a9e17e-090c-434c-b909-d0c20040faf8}</Project>
+      <Name>Canister.Sdk</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

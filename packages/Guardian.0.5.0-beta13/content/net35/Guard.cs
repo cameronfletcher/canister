@@ -11,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1636:FileHeaderCopyrightTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1641:FileHeaderCompanyNameTextMustMatch", Scope = "Module", Justification = "Content is valid.")]
@@ -26,14 +25,13 @@ using System.Runtime.CompilerServices;
 /// <summary>
 /// The <see cref="Guard"/> clause.
 /// </summary>
-[ExcludeFromCodeCoverage]
 internal class Guard
 {
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Private member.")]
     private static readonly Guard Instance = new Guard();
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Private member.")]
-    private static readonly Dictionary<Type, Func<string, string, ArgumentException>> ExceptionFactories = 
+    private static readonly Dictionary<Type, Func<string, string, ArgumentException>> ExceptionFactories =
         new Dictionary<Type, Func<string, string, ArgumentException>>
         {
             { typeof(ArgumentException), (message, parameterName) => new ArgumentException(message, parameterName) },
@@ -62,7 +60,6 @@ internal class Guard
     /// <typeparam name="T">The type of value to guard against.</typeparam>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "By design.")]
     public void Null<T>(Func<T> expression)
@@ -82,7 +79,6 @@ internal class Guard
     /// <typeparam name="T">The type of value to guard against.</typeparam>
     /// <param name="expression">An expression returning the value to guard against.</param>
     [DebuggerStepThrough]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "May not be called.")]
     [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "By design.")]
     public void Null<T>(Func<T?> expression)
@@ -154,9 +150,9 @@ internal class Guard
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Not Hungarian notation.")]
         public static string Parse<T>(Func<T> expression)
         {
-            if (expression == null) 
+            if (expression == null)
             {
-                throw GetException(expression); 
+                throw GetException(expression);
             }
 
             if (expression.Target == null)
@@ -179,13 +175,13 @@ internal class Guard
                         return null;
                     }
 
-                    if (OpCodeWhitelist.Contains(opCode) || data.Length <= 1) 
+                    if (OpCodeWhitelist.Contains(opCode) || data.Length <= 1)
                     {
-                        continue; 
+                        continue;
                     }
 
                     var handle = BitConverter.ToInt32(data, 0);
-                    var targetType = expression.Target.GetType(); 
+                    var targetType = expression.Target.GetType();
                     var member = targetType.Module.ResolveMember(handle, targetType.GetGenericArguments(), new Type[0]);
                     if (member.MemberType == MemberTypes.Method &&
                         (((MethodInfo)member).GetParameters().Any() || !member.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase)))
@@ -196,8 +192,8 @@ internal class Guard
                     memberNames.Push(member.MemberType == MemberTypes.Method ? member.Name.Substring(4) : member.Name);
                 }
 
-                return string.Join(".", memberNames.Reverse());
-            }            
+                return string.Join(".", memberNames.Reverse().ToArray());
+            }
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Not Hungarian notation.")]
