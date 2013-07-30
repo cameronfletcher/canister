@@ -63,6 +63,8 @@ namespace Canister.Sdk.Model
                 ComponentRegistrationId = this.Id,
                 ComponentKeys = componentKeys.ToArray()
             };
+
+            this.Apply(@event);
         }
     }
 }

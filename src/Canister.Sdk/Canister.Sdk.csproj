@@ -50,6 +50,7 @@
     <Compile Include="Cache\ComponentFactoriesCache.cs" />
     <Compile Include="Cache\ComponentFactoryCache.cs" />
     <Compile Include="Cache\ComponentKeyCache.cs" />
+    <Compile Include="Cache\AllComponentFactoriesCache.cs" />
     <Compile Include="Cache\IComponentCache.cs" />
     <Compile Include="Cache\IComponentFactoriesCache.cs" />
     <Compile Include="Cache\IComponentFactoryCache.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="Commands\ResolveComponent.cs" />
     <Compile Include="ComponentResolutionException.cs" />
     <Compile Include="ComponentRegistrationException.cs" />
+    <Compile Include="Events\ComponentResolved.cs" />
+    <Compile Include="Events\RequestStarted.cs" />
     <Compile Include="Model\ComponentResolverService.cs" />
     <Compile Include="Events\ComponentKeysAssigned.cs" />
     <Compile Include="Events\ComponentRegistered.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="Model\ISnapshotService.cs" />
     <Compile Include="Model\Request.cs" />
     <Compile Include="Model\Snapshot.cs" />
+    <Compile Include="Model\SnapshotService.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +97,8 @@
     <Compile Include="Views\ComponentFactoriesView.cs" />
     <Compile Include="Views\ComponentFactoryView.cs" />
     <Compile Include="Views\ComponentKeysView.cs" />
+    <Compile Include="Views\AllComponentFactoriesView.cs" />
+    <Compile Include="Views\ResolvedComponentsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

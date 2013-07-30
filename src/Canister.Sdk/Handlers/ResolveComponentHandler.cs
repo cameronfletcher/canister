@@ -28,8 +28,7 @@ namespace Canister.Sdk.Handlers
             Guard.Against.Null(() => command);
 
             var request = this.requestRepository.Get(command.RequestId);
-            var component = this.componentResolverService.Resolve(request.Snapshot, command.ComponentKey);
-            request.Track(component);
+            request.Resolve(command.ComponentKey, this.componentResolverService);
             this.requestRepository.Save(request);
         }
     }

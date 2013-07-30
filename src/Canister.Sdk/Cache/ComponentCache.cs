@@ -13,7 +13,7 @@ namespace Canister.Sdk.Cache
 
         public object[] GetComponents(Guid requiestId)
         {
-            return this.cache[requiestId];
+            return this.cache.ContainsKey(requiestId) ? this.cache[requiestId] : new object[0];
         }
 
         public void SetComponents(Guid requestId, object[] components)

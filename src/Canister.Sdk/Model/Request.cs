@@ -15,7 +15,7 @@ namespace Canister.Sdk.Model
         {
             Guard.Against.Null(() => snapshot);
 
-            var @event = new RequestEnded
+            var @event = new RequestStarted
             {
                 RequestId = id
             };
@@ -42,12 +42,30 @@ namespace Canister.Sdk.Model
             this.hasEnded = true;
         }
 
-        public void Track(object component)
+        //public void Track(object component)
+        //{
+        //    if (this.hasEnded)
+        //    {
+        //        throw new ComponentResolutionException();
+        //    }
+        //}
+
+        public void Resolve(object componentKey, IComponentResolverService componentResolverService)
         {
             if (this.hasEnded)
             {
                 throw new ComponentResolutionException();
             }
+
+            var component = componentResolverService.Resolve(this.Snapshot, componentKey);
+
+            var @event = new ComponentResolved
+            {
+                RequestId = this.Id,
+                Component = component,
+            };
+
+            this.Apply(@event);
         }
     }
 }

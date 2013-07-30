@@ -10,6 +10,6 @@ namespace Canister.Sdk.Persistence
     {
         TAggregate Get(TKey naturalKey);
 
-        void Save(Aggregate aggregate);
+        void Save(TAggregate aggregate);
     }
 }

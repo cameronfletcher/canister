@@ -19,12 +19,12 @@
         {
             Guard.Against.NullOrEmptyOrNullElements(() => componentKeys);
 
-            if (componentKeys.Any(componentKey => componentKey.GetType() != typeof(Type)))
+            if (componentKeys.Any(componentKey => !(componentKey is Type)))
             {
                 throw new ComponentRegistrationException("Invalid key type.");
             }
 
-            if (componentKeys.Cast<Type>().Any(componentKey => !componentType.IsAssignableFrom(componentKey.GetType())))
+            if (componentKeys.Cast<Type>().Any(componentKey => !componentKey.IsAssignableFrom(componentType)))
             {
                 // TODO (Cameron): Fix exception message.
                 throw new ComponentRegistrationException("Cannot assign component type to original component type.");

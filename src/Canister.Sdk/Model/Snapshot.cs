@@ -4,31 +4,30 @@
 
 namespace Canister.Sdk.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     // value type
     public class Snapshot
     {
-        private readonly Dictionary<object, Func<IComponentResolver, object>[]> allComponentFactories;
+        private readonly Dictionary<object, ComponentFactory[]> allComponentFactories;
 
-        public Snapshot(Dictionary<object, Func<IComponentResolver, object>[]> allComponentFactories)
+        public Snapshot(Dictionary<object, ComponentFactory[]> allComponentFactories)
         {
             Guard.Against.Null(() => allComponentFactories);
 
             this.allComponentFactories = allComponentFactories;
         }
 
-        public Func<IComponentResolver, object> GetComponentFactory(object componentKey)
+        public ComponentFactory GetComponentFactory(object componentKey)
         {
             var componentFactories = this.GetComponentFactories(componentKey);
             return componentFactories == null ? null : componentFactories.First();
         }
 
-        public Func<IComponentResolver, object>[] GetComponentFactories(object componentKey)
+        public ComponentFactory[] GetComponentFactories(object componentKey)
         {
-            Func<IComponentResolver, object>[] componentFactories;
+            ComponentFactory[] componentFactories;
             this.allComponentFactories.TryGetValue(componentKey, out componentFactories);
             return componentFactories;
         }

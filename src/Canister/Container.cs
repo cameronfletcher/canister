@@ -6,6 +6,7 @@ namespace Canister.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Canister.Sdk;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Commands;
@@ -52,7 +53,7 @@ namespace Canister.Model
                     ComponentKey = componentType
                 });
 
-            var components = this.componentCache.GetComponents(requestId);
+            var components = this.componentCache.GetComponents(requestId).First();
             this.bus.Send(new EndRequest { RequestId = requestId });
 
             return components;

@@ -8,7 +8,8 @@ namespace Canister.Sdk.Persistence
     using System.Collections.Generic;
     using Canister.Sdk.Model;
 
-    public sealed class Repository<TKey, TAggregate> where TAggregate : Aggregate
+    public class Repository<TKey, TAggregate> : IRepository<TKey, TAggregate>
+        where TAggregate : Aggregate
     {
         private readonly Dictionary<TKey, TAggregate> store = new Dictionary<TKey, TAggregate>();
 

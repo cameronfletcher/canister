@@ -2,7 +2,7 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Model
+namespace Canister
 {
     using System;
     using Canister.Sdk;
