@@ -10,24 +10,21 @@ namespace Canister.Model
     using Canister.Sdk.Cache;
     using Canister.Sdk.Commands;
 
-    public class ContainerBase : IContainer
+    public class Container : IContainer
     {
         private readonly MessageBus bus;
         private readonly IComponentCache componentCache;
-        private readonly IComponentRegistrationCache componentRegistrationCache;
 
-        public ContainerBase(MessageBus bus, IComponentCache componentCache, IComponentRegistrationCache componentRegistrationCache)
+        public Container(MessageBus bus, IComponentCache componentCache)
         {
             Guard.Against.Null(() => bus);
             Guard.Against.Null(() => componentCache);
-            Guard.Against.Null(() => componentRegistrationCache);
 
             this.bus = bus;
             this.componentCache = componentCache;
-            this.componentRegistrationCache = componentRegistrationCache;
         }
 
-        public IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory) where T : class
+        public IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory)
         {
             Guard.Against.Null(() => componentFactory);
 
@@ -38,13 +35,13 @@ namespace Canister.Model
                 {
                     ComponentRegistrationId = componentRegistrationId,
                     ComponentKey = typeof(T),
-                    ComponentFactory = resolver => componentFactory(new ComponentContext(resolver))
+                    ComponentFactory = componentResolver => componentFactory.Invoke(new ComponentContext(componentResolver))
                 });
 
             return new ComponentRegistration(this.bus, componentRegistrationId);
         }
 
-        public object Resolve(object componentKey)
+        public object Resolve(Type componentType)
         {
             var requestId = Guid.NewGuid();
             this.bus.Send(new BeginRequest { RequestId = requestId });
@@ -52,7 +49,7 @@ namespace Canister.Model
                 new ResolveComponent
                 {
                     RequestId = requestId,
-                    ComponentKey = componentKey
+                    ComponentKey = componentType
                 });
 
             var components = this.componentCache.GetComponents(requestId);
@@ -61,7 +58,7 @@ namespace Canister.Model
             return components;
         }
 
-        public IEnumerable<object> ResolveAll(object componentKey)
+        public IEnumerable<object> ResolveAll(Type componentType)
         {
             var requestId = Guid.NewGuid();
             this.bus.Send(new BeginRequest { RequestId = requestId });
@@ -69,7 +66,7 @@ namespace Canister.Model
                 new ResolveAllComponents
                 {
                     RequestId = requestId,
-                    ComponentKey = componentKey
+                    ComponentKey = componentType
                 });
 
             var components = this.componentCache.GetComponents(requestId);

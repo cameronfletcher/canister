@@ -5,7 +5,6 @@
 namespace Canister.Sdk.Commands
 {
     using System;
-    using Canister.Sdk.Model;
 
     public sealed class RegisterComponent
     {
@@ -13,6 +12,6 @@ namespace Canister.Sdk.Commands
 
         public object ComponentKey { get; set; }
 
-        public Func<IComponentResolver, object> ComponentFactory { get; set; }
+        public ComponentFactory ComponentFactory { get; set; }
     }
 }

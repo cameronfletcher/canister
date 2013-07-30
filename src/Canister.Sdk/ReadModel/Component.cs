@@ -4,9 +4,6 @@
 
 namespace Canister.Sdk.ReadModel
 {
-    using System;
-    using Canister.Sdk.Model;
-
     // TODO (Cameron): Add Lifetime, Scope, etc.
     internal sealed class Component
     {
@@ -16,6 +13,6 @@ namespace Canister.Sdk.ReadModel
 
         public bool PreserveRegistrations { get; set; }
 
-        public Func<IComponentResolver, object> Factory { get; set; }
+        public ComponentFactory Factory { get; set; }
     }
 }

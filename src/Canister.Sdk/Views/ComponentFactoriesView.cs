@@ -74,7 +74,7 @@ namespace Canister.Sdk.Views
             }
         }
 
-        private Func<IComponentResolver, object>[] GetComponentFactories(object componentKey)
+        private ComponentFactory[] GetComponentFactories(object componentKey)
         {
             return this.components.Values
                 .Where(component => component.Keys.Contains(componentKey))

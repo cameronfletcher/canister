@@ -4,21 +4,19 @@
 
 namespace Canister.Sdk.Cache
 {
-    using System;
     using System.Collections.Generic;
-    using Canister.Sdk.Model;
 
     public class ComponentFactoriesCache : IComponentFactoriesCache
     {
-        private readonly Dictionary<object, Func<IComponentResolver, object>[]> cache = new Dictionary<object, Func<IComponentResolver, object>[]>();
+        private readonly Dictionary<object, ComponentFactory[]> cache = new Dictionary<object, ComponentFactory[]>();
 
-        public Func<IComponentResolver, object>[] GetComponentFactories(object componentKey)
+        public ComponentFactory[] GetComponentFactories(object componentKey)
         {
-            Func<IComponentResolver, object>[] componentFactories = null;
+            ComponentFactory[] componentFactories = null;
             return this.cache.TryGetValue(componentKey, out componentFactories) ? componentFactories : null;
         }
 
-        public void SetComponentFactories(object componentKey, Func<IComponentResolver, object>[] componentFactories)
+        public void SetComponentFactories(object componentKey, ComponentFactory[] componentFactories)
         {
             if (componentFactories == null && this.cache.ContainsKey(componentKey))
             {

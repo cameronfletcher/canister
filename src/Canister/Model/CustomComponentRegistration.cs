@@ -9,7 +9,7 @@
     {
         private readonly Type componentType;
 
-        public CustomComponentRegistration(Guid id, Type componentType, Func<IComponentResolver, object> componentFactory)
+        public CustomComponentRegistration(Guid id, Type componentType, ComponentFactory componentFactory)
             : base(id, componentType, componentFactory)
         {
             this.componentType = componentType;

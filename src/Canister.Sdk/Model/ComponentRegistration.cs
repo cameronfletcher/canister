@@ -13,7 +13,7 @@ namespace Canister.Sdk.Model
     {
         private bool existingRegistrationsPreserved;
 
-        public ComponentRegistration(Guid id, object componentKey, Func<IComponentResolver, object> componentFactory)
+        public ComponentRegistration(Guid id, object componentKey, ComponentFactory componentFactory)
         {
             Guard.Against.Null(() => componentKey);
             Guard.Against.Null(() => componentFactory);

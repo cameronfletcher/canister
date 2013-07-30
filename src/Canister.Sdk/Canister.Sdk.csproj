@@ -46,6 +46,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Cache\ComponentCache.cs" />
     <Compile Include="Cache\ComponentFactoriesCache.cs" />
     <Compile Include="Cache\ComponentFactoryCache.cs" />
     <Compile Include="Cache\ComponentKeyCache.cs" />

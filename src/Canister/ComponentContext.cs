@@ -6,19 +6,23 @@
 
     public class ComponentContext : IComponentContext
     {
+        private readonly IComponentResolver resolver;
+
         public ComponentContext(IComponentResolver resolver)
         {
+            Guard.Against.Null(() => resolver);
+
+            this.resolver = resolver;
         }
 
-        public object Resolve(object componentKey)
+        public object Resolve(Type componentType)
         {
-            throw new NotImplementedException();
+            return this.resolver.Resolve(componentType);
         }
 
-        public IEnumerable<object> ResolveAll(object componentKey)
+        public IEnumerable<object> ResolveAll(Type componentType)
         {
-            throw new NotImplementedException();
+            return this.resolver.ResolveAll(componentType);
         }
     }
-
 }

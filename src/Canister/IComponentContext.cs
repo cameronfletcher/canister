@@ -1,16 +1,12 @@
-﻿// <copyright file="IComponentContext.cs" company="Canister contributors">
-//  Copyright (c) Canister contributors. All rights reserved.
-// </copyright>
-
-namespace Canister
+﻿namespace Canister
 {
+    using System;
     using System.Collections.Generic;
-    using Canister.Sdk;
 
-    public interface IComponentContext : IComponentResolver
+    public interface IComponentContext
     {
-        //object Resolve(object componentKey);
+        object Resolve(Type componentType);
 
-        //IEnumerable<object> ResolveAll(object componentKey);
+        IEnumerable<object> ResolveAll(Type componentType);
     }
 }

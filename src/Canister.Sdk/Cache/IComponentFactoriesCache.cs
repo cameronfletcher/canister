@@ -4,13 +4,10 @@
 
 namespace Canister.Sdk.Cache
 {
-    using System;
-    using Canister.Sdk.Model;
-
     public interface IComponentFactoriesCache
     {
-        Func<IComponentResolver, object>[] GetComponentFactories(object componentKey);
+        ComponentFactory[] GetComponentFactories(object componentKey);
 
-        void SetComponentFactories(object componentKey, Func<IComponentResolver, object>[] componentFactories);
+        void SetComponentFactories(object componentKey, ComponentFactory[] componentFactories);
     }
 }

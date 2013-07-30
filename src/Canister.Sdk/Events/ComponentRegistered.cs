@@ -13,6 +13,6 @@ namespace Canister.Sdk.Events
 
         public object ComponentKey { get; set; }
 
-        public Func<IComponentResolver, object> ComponentFactory { get; set; }
+        public ComponentFactory ComponentFactory { get; set; }
     }
 }

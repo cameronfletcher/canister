@@ -9,7 +9,6 @@ namespace Canister.Sdk.Views
     using System.Linq;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Events;
-    using Canister.Sdk.Model;
     using Canister.Sdk.ReadModel;
 
     public sealed class ComponentFactoryView
@@ -74,7 +73,7 @@ namespace Canister.Sdk.Views
             }
         }
 
-        private Func<IComponentResolver, object> GetComponentFactory(object componentKey)
+        private ComponentFactory GetComponentFactory(object componentKey)
         {
             return this.components.Values
                 .Where(component => component.Keys.Contains(componentKey))

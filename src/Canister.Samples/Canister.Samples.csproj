@@ -33,6 +33,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Canister.Sdk\Canister.Sdk.csproj">
+      <Project>{99a9e17e-090c-434c-b909-d0c20040faf8}</Project>
+      <Name>Canister.Sdk</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Canister\Canister.csproj">
       <Project>{39f195af-0329-4bae-98d2-222313774934}</Project>
       <Name>Canister</Name>
