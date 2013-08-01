@@ -11,7 +11,7 @@ namespace Canister.Sdk
     /// The exception that is thrown when there is a problem resolving a component.
     /// </summary>
     [Serializable]
-    public class ComponentResolutionException : Exception, ISerializable
+    public class ComponentResolutionException : Exception
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="ComponentResolutionException" /> class.

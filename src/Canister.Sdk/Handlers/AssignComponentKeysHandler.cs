@@ -9,24 +9,24 @@ namespace Canister.Sdk.Handlers
     using Canister.Sdk.Model;
     using Canister.Sdk.Persistence;
 
-    public sealed class AssignComponentKeysHandler
+    public class AssignComponentKeysHandler
     {
-        private readonly IRepository<Guid, ComponentRegistration> repository;
-
         public AssignComponentKeysHandler(IRepository<Guid, ComponentRegistration> repository)
         {
             Guard.Against.Null(() => repository);
 
-            this.repository = repository;
+            this.Repository = repository;
         }
 
-        public void Handle(AssignComponentKeys command)
+        protected IRepository<Guid, ComponentRegistration> Repository { get; private set; }
+
+        public virtual void Handle(AssignComponentKeys command)
         {
             Guard.Against.Null(() => command);
 
-            var componentRegistration = this.repository.Get(command.ComponentRegistrationId);
+            var componentRegistration = this.Repository.Get(command.ComponentRegistrationId);
             componentRegistration.AssignComponentKeys(command.ComponentKeys);
-            this.repository.Save(componentRegistration);
+            this.Repository.Save(componentRegistration);
         }
     }
 }

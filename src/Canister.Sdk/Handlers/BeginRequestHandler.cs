@@ -9,27 +9,28 @@ namespace Canister.Sdk.Handlers
     using Canister.Sdk.Model;
     using Canister.Sdk.Persistence;
 
-    public sealed class BeginRequestHandler
+    public class BeginRequestHandler
     {
-        private readonly IRepository<Guid, Request> repository;
-        private readonly ISnapshotService snapshotService;
-
         public BeginRequestHandler(IRepository<Guid, Request> repository, ISnapshotService snapshotService)
         {
             Guard.Against.Null(() => repository);
             Guard.Against.Null(() => snapshotService);
 
-            this.repository = repository;
-            this.snapshotService = snapshotService;
+            this.Repository = repository;
+            this.SnapshotService = snapshotService;
         }
 
-        public void Handle(BeginRequest command)
+        protected IRepository<Guid, Request> Repository { get; private set; }
+
+        protected ISnapshotService SnapshotService { get; private set; }
+
+        public virtual void Handle(BeginRequest command)
         {
             Guard.Against.Null(() => command);
 
-            var snapshot = this.snapshotService.GetSnapshot();
+            var snapshot = this.SnapshotService.GetSnapshot();
             var request = new Request(command.RequestId, snapshot);
-            this.repository.Save(request);
+            this.Repository.Save(request);
         }
     }
 }

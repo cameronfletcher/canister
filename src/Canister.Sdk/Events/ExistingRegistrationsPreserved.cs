@@ -6,7 +6,7 @@ namespace Canister.Sdk.Events
 {
     using System;
 
-    public class ExistingRegistrationsPreserved
+    public sealed class ExistingRegistrationsPreserved
     {
         public Guid ComponentRegistrationId { get; set; }
     }

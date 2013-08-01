@@ -4,10 +4,12 @@
 
 namespace Canister.Sdk.Cache
 {
+    using System.Collections.Generic;
+
     public interface IComponentFactoriesCache
     {
-        ComponentFactory[] GetComponentFactories(object componentKey);
+        Dictionary<object, ComponentFactory[]> GetComponentFactories();
 
-        void SetComponentFactories(object componentKey, ComponentFactory[] componentFactories);
+        void SetComponentFactories(Dictionary<object, ComponentFactory[]> componentFactories);
     }
 }

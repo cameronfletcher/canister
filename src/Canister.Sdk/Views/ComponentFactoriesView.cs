@@ -9,17 +9,15 @@ namespace Canister.Sdk.Views
     using System.Linq;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Events;
-    using Canister.Sdk.Model;
-    using Canister.Sdk.ReadModel;
 
     public sealed class ComponentFactoriesView
     {
         private readonly Dictionary<Guid, Component> components = new Dictionary<Guid, Component>();
-        private readonly IComponentFactoriesCache cache;
+        private readonly ComponentFactoriesCache cache;
 
         private int componentRegistrationCount;
 
-        public ComponentFactoriesView(IComponentFactoriesCache cache)
+        public ComponentFactoriesView(ComponentFactoriesCache cache)
         {
             Guard.Against.Null(() => cache);
 
@@ -67,11 +65,15 @@ namespace Canister.Sdk.Views
 
         private void RebuildCache(object[] componentKeys)
         {
+            var factories = this.cache.GetComponentFactories();
+
             foreach (var componentKey in componentKeys)
             {
                 var componentFactories = this.GetComponentFactories(componentKey);
-                this.cache.SetComponentFactories(componentKey, componentFactories);
+                factories[componentKey] = componentFactories;
             }
+
+            this.cache.SetComponentFactories(factories);
         }
 
         private ComponentFactory[] GetComponentFactories(object componentKey)
@@ -82,6 +84,17 @@ namespace Canister.Sdk.Views
                 .ThenByDescending(component => component.RegistrationCount)
                 .Select(component => component.Factory)
                 .ToArray();
+        }
+
+        private class Component
+        {
+            public int RegistrationCount { get; set; }
+
+            public object[] Keys { get; set; }
+
+            public bool PreserveRegistrations { get; set; }
+
+            public ComponentFactory Factory { get; set; }
         }
     }
 }

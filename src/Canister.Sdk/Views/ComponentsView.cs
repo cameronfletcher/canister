@@ -1,14 +1,18 @@
-﻿namespace Canister.Sdk.Views
+﻿// <copyright file="ComponentsView.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Sdk.Views
 {
     using System.Linq;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Events;
 
-    public sealed class ResolvedComponentsView
+    public sealed class ComponentsView
     {
-        private readonly IComponentCache cache;
+        private readonly IComponentsCache cache;
 
-        public ResolvedComponentsView(IComponentCache cache)
+        public ComponentsView(IComponentsCache cache)
         {
             Guard.Against.Null(() => cache);
 
@@ -21,6 +25,12 @@
 
             var components = this.cache.GetComponents(@event.RequestId);
             this.cache.SetComponents(@event.RequestId, components.Union(new[] { @event.Component }).ToArray());
+        }
+
+        public void Handle(RequestEnded @event)
+        {
+            // TODO (Cameron): This. Properly.
+            this.cache.SetComponents(@event.RequestId, null);
         }
     }
 }

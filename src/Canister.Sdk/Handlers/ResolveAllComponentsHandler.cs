@@ -9,9 +9,9 @@ namespace Canister.Sdk.Handlers
     using Canister.Sdk.Model;
     using Canister.Sdk.Persistence;
 
-    public class ResolveComponentHandler
+    public class ResolveAllComponentsHandler
     {
-        public ResolveComponentHandler(IRepository<Guid, Request> requestRepository, IComponentResolverService componentResolverService)
+        public ResolveAllComponentsHandler(IRepository<Guid, Request> requestRepository, IComponentResolverService componentResolverService)
         {
             Guard.Against.Null(() => requestRepository);
             Guard.Against.Null(() => componentResolverService);
@@ -24,12 +24,12 @@ namespace Canister.Sdk.Handlers
 
         protected IComponentResolverService ComponentResolverService { get; private set; }
 
-        public virtual void Handle(ResolveComponent command)
+        public virtual void Handle(ResolveAllComponents command)
         {
             Guard.Against.Null(() => command);
 
             var request = this.Repository.Get(command.RequestId);
-            request.Resolve(command.ComponentKey, this.ComponentResolverService);
+            request.ResolveAll(command.ComponentKey, this.ComponentResolverService);
             this.Repository.Save(request);
         }
     }

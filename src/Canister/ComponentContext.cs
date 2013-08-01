@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Canister.Sdk;
 
-    public class ComponentContext : IComponentContext
+    public sealed class ComponentContext : IComponentContext
     {
         private readonly IComponentResolver resolver;
 

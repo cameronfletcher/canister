@@ -1,4 +1,4 @@
-﻿// <copyright file="ComponentCache.cs" company="Canister contributors">
+﻿// <copyright file="ComponentsCache.cs" company="Canister contributors">
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace Canister.Sdk.Cache
     using System;
     using System.Collections.Generic;
 
-    public class ComponentCache : IComponentCache
+    public class ComponentsCache : IComponentsCache
     {
         private readonly Dictionary<Guid, object[]> cache = new Dictionary<Guid, object[]>();
 

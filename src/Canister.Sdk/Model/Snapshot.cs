@@ -7,11 +7,11 @@ namespace Canister.Sdk.Model
     using System.Collections.Generic;
     using System.Linq;
 
-    // value type
     public class Snapshot
     {
         private readonly Dictionary<object, ComponentFactory[]> allComponentFactories;
 
+        // TODO (Cameron): Check that this contains a copy of the dictionary, not a reference to.
         public Snapshot(Dictionary<object, ComponentFactory[]> allComponentFactories)
         {
             Guard.Against.Null(() => allComponentFactories);

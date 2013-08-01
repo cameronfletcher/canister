@@ -7,12 +7,8 @@ namespace Canister
     using System;
     using System.Collections.Generic;
 
-    public interface IContainer
+    public interface IContainer : IComponentContext
     {
         IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory);
-
-        object Resolve(Type componentType);
-
-        IEnumerable<object> ResolveAll(Type componentType);
     }
 }

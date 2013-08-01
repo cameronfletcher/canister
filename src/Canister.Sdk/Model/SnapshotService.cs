@@ -1,12 +1,16 @@
-﻿namespace Canister.Sdk.Model
+﻿// <copyright file="SnapshotService.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Sdk.Model
 {
     using Canister.Sdk.Cache;
 
     public class SnapshotService : ISnapshotService
     {
-        private readonly AllComponentFactoriesCache cache;
+        private readonly ComponentFactoriesCache cache;
 
-        public SnapshotService(AllComponentFactoriesCache cache)
+        public SnapshotService(ComponentFactoriesCache cache)
         {
             this.cache = cache;
         }

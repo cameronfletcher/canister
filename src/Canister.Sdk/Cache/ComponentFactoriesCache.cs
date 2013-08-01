@@ -8,23 +8,18 @@ namespace Canister.Sdk.Cache
 
     public class ComponentFactoriesCache : IComponentFactoriesCache
     {
-        private readonly Dictionary<object, ComponentFactory[]> cache = new Dictionary<object, ComponentFactory[]>();
+        // TODO (Cameron): Check that we aren't passing around a reference to the same object here.
+        // TODO (Cameron): Fix the type we're passing round.
+        private Dictionary<object, ComponentFactory[]> cache = new Dictionary<object, ComponentFactory[]>();
 
-        public ComponentFactory[] GetComponentFactories(object componentKey)
+        public Dictionary<object, ComponentFactory[]> GetComponentFactories()
         {
-            ComponentFactory[] componentFactories = null;
-            return this.cache.TryGetValue(componentKey, out componentFactories) ? componentFactories : null;
+            return this.cache;
         }
 
-        public void SetComponentFactories(object componentKey, ComponentFactory[] componentFactories)
+        public void SetComponentFactories(Dictionary<object, ComponentFactory[]> componentFactories)
         {
-            if (componentFactories == null && this.cache.ContainsKey(componentKey))
-            {
-                this.cache.Remove(componentKey);
-                return;
-            }
-
-            this.cache[componentKey] = componentFactories;
+            this.cache = componentFactories;
         }
     }
 }

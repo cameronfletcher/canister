@@ -4,8 +4,12 @@
 
 namespace Canister.Sdk.Model
 {
+    using System.Collections.Generic;
+
     public interface IComponentResolverService
     {
-        object Resolve(Snapshot snapshot, object componentKey);
+        object Resolve(object componentKey, Snapshot snapshot);
+
+        IEnumerable<object> ResolveAll(object componentKey, Snapshot snapshot);
     }
 }

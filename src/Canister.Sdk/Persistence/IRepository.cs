@@ -6,7 +6,8 @@ namespace Canister.Sdk.Persistence
 {
     using Canister.Sdk.Model;
 
-    public interface IRepository<TKey, TAggregate> where TAggregate : Aggregate
+    public interface IRepository<TKey, TAggregate>
+        where TAggregate : Aggregate
     {
         TAggregate Get(TKey naturalKey);
 

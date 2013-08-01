@@ -6,7 +6,7 @@ namespace Canister.Sdk.Events
 {
     using System;
 
-    public class RequestEnded
+    public sealed class RequestEnded
     {
         public Guid RequestId { get; set; }
     }

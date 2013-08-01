@@ -1,4 +1,4 @@
-﻿// <copyright file="IComponentCache.cs" company="Canister contributors">
+﻿// <copyright file="IComponentsCache.cs" company="Canister contributors">
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace Canister.Sdk.Cache
     using System;
     using System.Collections.Generic;
 
-    public interface IComponentCache
+    public interface IComponentsCache
     {
         object[] GetComponents(Guid requiestId);
 

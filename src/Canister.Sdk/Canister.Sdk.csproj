@@ -46,16 +46,10 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Cache\ComponentCache.cs" />
+    <Compile Include="Cache\ComponentsCache.cs" />
     <Compile Include="Cache\ComponentFactoriesCache.cs" />
-    <Compile Include="Cache\ComponentFactoryCache.cs" />
-    <Compile Include="Cache\ComponentKeyCache.cs" />
-    <Compile Include="Cache\AllComponentFactoriesCache.cs" />
-    <Compile Include="Cache\IComponentCache.cs" />
+    <Compile Include="Cache\IComponentsCache.cs" />
     <Compile Include="Cache\IComponentFactoriesCache.cs" />
-    <Compile Include="Cache\IComponentFactoryCache.cs" />
-    <Compile Include="Cache\IComponentKeyCache.cs" />
-    <Compile Include="Cache\IComponentRegistrationCache.cs" />
     <Compile Include="Commands\AssignComponentKeys.cs" />
     <Compile Include="Commands\BeginRequest.cs" />
     <Compile Include="Commands\ResolveAllComponents.cs" />
@@ -63,10 +57,12 @@
     <Compile Include="Commands\PreserveExistingRegistrations.cs" />
     <Compile Include="Commands\RegisterComponent.cs" />
     <Compile Include="Commands\ResolveComponent.cs" />
+    <Compile Include="ComponentFactory.cs" />
     <Compile Include="ComponentResolutionException.cs" />
     <Compile Include="ComponentRegistrationException.cs" />
     <Compile Include="Events\ComponentResolved.cs" />
     <Compile Include="Events\RequestStarted.cs" />
+    <Compile Include="Handlers\ResolveAllComponentsHandler.cs" />
     <Compile Include="Model\ComponentResolverService.cs" />
     <Compile Include="Events\ComponentKeysAssigned.cs" />
     <Compile Include="Events\ComponentRegistered.cs" />
@@ -92,13 +88,9 @@
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadModel\Component.cs" />
     <Compile Include="MessageBus.cs" />
     <Compile Include="Views\ComponentFactoriesView.cs" />
-    <Compile Include="Views\ComponentFactoryView.cs" />
-    <Compile Include="Views\ComponentKeysView.cs" />
-    <Compile Include="Views\AllComponentFactoriesView.cs" />
-    <Compile Include="Views\ResolvedComponentsView.cs" />
+    <Compile Include="Views\ComponentsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

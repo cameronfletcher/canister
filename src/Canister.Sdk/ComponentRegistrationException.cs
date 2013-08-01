@@ -11,7 +11,7 @@ namespace Canister.Sdk
     /// The exception that is thrown when there is a problem registering a component.
     /// </summary>
     [Serializable]
-    public class ComponentRegistrationException : Exception, ISerializable
+    public class ComponentRegistrationException : Exception
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="ComponentRegistrationException" /> class.

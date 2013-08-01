@@ -6,8 +6,6 @@ namespace Canister.Sdk
 {
     using System.Collections.Generic;
 
-    public delegate object ComponentFactory(IComponentResolver componentResolver);
-
     public interface IComponentResolver
     {
         object Resolve(object componentKey);

@@ -1,4 +1,4 @@
-﻿// <copyright file="RegisterComponentHandler.cs" company="Canister contributors">
+﻿// <copyright file="CustomRegisterComponentHandler.cs" company="Canister contributors">
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
@@ -7,30 +7,26 @@ namespace Canister.Sdk.Handlers
     using System;
     using Canister.Model;
     using Canister.Sdk.Commands;
-    using Canister.Sdk.Model;
     using Canister.Sdk.Persistence;
+    using ComponentRegistration = Canister.Sdk.Model.ComponentRegistration;
 
-    public sealed class CustomRegisterComponentHandler
+    public class CustomRegisterComponentHandler : RegisterComponentHandler
     {
-        private readonly IRepository<Guid, CustomComponentRegistration> repository;
-
-        public CustomRegisterComponentHandler(IRepository<Guid, CustomComponentRegistration> repository)
+        public CustomRegisterComponentHandler(IRepository<Guid, ComponentRegistration> repository)
+            : base(repository)
         {
-            Guard.Against.Null(() => repository);
-
-            this.repository = repository;
         }
 
-        public void Handle(RegisterComponent command)
+        public override void Handle(RegisterComponent command)
         {
             Guard.Against.Null(() => command);
 
             var componentRegistration = new CustomComponentRegistration(
-                command.ComponentRegistrationId, 
-                command.ComponentKey as Type, 
+                command.ComponentRegistrationId,
+                command.ComponentKey as Type,
                 command.ComponentFactory);
-            
-            this.repository.Save(componentRegistration);
+
+            this.Repository.Save(componentRegistration);
         }
     }
 }

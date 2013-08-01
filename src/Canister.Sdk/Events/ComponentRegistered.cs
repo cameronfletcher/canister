@@ -5,9 +5,8 @@
 namespace Canister.Sdk.Events
 {
     using System;
-    using Canister.Sdk.Model;
 
-    public class ComponentRegistered
+    public sealed class ComponentRegistered
     {
         public Guid ComponentRegistrationId { get; set; }
 

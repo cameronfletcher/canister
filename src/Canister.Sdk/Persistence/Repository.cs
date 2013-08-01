@@ -6,6 +6,7 @@ namespace Canister.Sdk.Persistence
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using Canister.Sdk.Model;
 
     public class Repository<TKey, TAggregate> : IRepository<TKey, TAggregate>
@@ -30,8 +31,12 @@ namespace Canister.Sdk.Persistence
             TAggregate aggregate;
             if (!this.store.TryGetValue(naturalKey, out aggregate))
             {
-                // not found
-                throw new Exception();
+                throw new NotSupportedException(
+                    string.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The type '{0}' identified by the key '{1}' cannot be found.",
+                        typeof(TAggregate).Name,
+                        naturalKey.ToString()));
             }
 
             return aggregate;
@@ -46,8 +51,12 @@ namespace Canister.Sdk.Persistence
             TAggregate savedAggregate;
             if (this.store.TryGetValue(naturalKey, out savedAggregate) && !object.ReferenceEquals(aggregate, savedAggregate))
             {
-                // conflict
-                throw new Exception();
+                throw new NotSupportedException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "The type '{0}' identified by the key '{1}' already exists.",
+                        typeof(TAggregate).Name,
+                        naturalKey.ToString()));
             }
 
             foreach (var @event in aggregate.DequeueEvents())

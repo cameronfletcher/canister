@@ -58,6 +58,7 @@
     <Compile Include="ComponentRegistration.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Model\CustomComponentRegistration.cs" />
+    <Compile Include="Persistence\CustomComponentRegistrationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterComponentHandler.cs" />
   </ItemGroup>

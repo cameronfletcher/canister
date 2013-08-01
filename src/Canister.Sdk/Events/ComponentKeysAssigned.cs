@@ -7,7 +7,7 @@ namespace Canister.Sdk.Events
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public class ComponentKeysAssigned
+    public sealed class ComponentKeysAssigned
     {
         public Guid ComponentRegistrationId { get; set; }
 

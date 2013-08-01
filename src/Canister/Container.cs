@@ -14,9 +14,9 @@ namespace Canister.Model
     public class Container : IContainer
     {
         private readonly MessageBus bus;
-        private readonly IComponentCache componentCache;
+        private readonly IComponentsCache componentCache;
 
-        public Container(MessageBus bus, IComponentCache componentCache)
+        public Container(MessageBus bus, IComponentsCache componentCache)
         {
             Guard.Against.Null(() => bus);
             Guard.Against.Null(() => componentCache);
