@@ -5,7 +5,7 @@
 namespace Canister.Sdk.Handlers
 {
     using System;
-    using Canister.Model;
+    using Canister.Sdk.Model;
     using Canister.Sdk.Commands;
     using Canister.Sdk.Persistence;
     using ComponentRegistration = Canister.Sdk.Model.ComponentRegistration;

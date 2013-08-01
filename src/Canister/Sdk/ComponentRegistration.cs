@@ -2,10 +2,9 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister
+namespace Canister.Sdk
 {
     using System;
-    using Canister.Sdk;
     using Canister.Sdk.Commands;
 
     public class ComponentRegistration : IComponentRegistration
@@ -21,15 +20,15 @@ namespace Canister
             this.id = id;
         }
 
-        public IComponentRegistration As(object[] componentKeys)
+        public IComponentRegistration As(Type[] componentTypes)
         {
-            Guard.Against.NullOrEmpty(() => componentKeys);
+            Guard.Against.NullOrEmpty(() => componentTypes);
 
             this.bus.Send(
                 new AssignComponentKeys 
                 { 
                     ComponentRegistrationId = this.id,
-                    ComponentKeys = componentKeys
+                    ComponentKeys = componentTypes
                 });
 
             return this;

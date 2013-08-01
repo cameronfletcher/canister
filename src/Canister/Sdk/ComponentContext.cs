@@ -1,8 +1,7 @@
-﻿namespace Canister
+﻿namespace Canister.Sdk
 {
     using System;
     using System.Collections.Generic;
-    using Canister.Sdk;
 
     public sealed class ComponentContext : IComponentContext
     {

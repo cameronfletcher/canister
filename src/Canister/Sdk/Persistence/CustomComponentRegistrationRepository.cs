@@ -1,7 +1,7 @@
-﻿namespace Canister.Persistence
+﻿namespace Canister.Sdk.Persistence
 {
     using System;
-    using Canister.Model;
+    using Canister.Sdk.Model;
     using Canister.Sdk;
     using Canister.Sdk.Persistence;
     using ComponentRegistration = Canister.Sdk.Model.ComponentRegistration;

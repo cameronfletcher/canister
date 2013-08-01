@@ -2,11 +2,12 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Model
+namespace Canister
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Canister.Sdk.Factories;
     using Canister.Sdk;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Commands;
@@ -14,15 +15,21 @@ namespace Canister.Model
     public class Container : IContainer
     {
         private readonly MessageBus bus;
-        private readonly IComponentsCache componentCache;
+        private readonly IComponentsCache componentsCache;
 
-        public Container(MessageBus bus, IComponentsCache componentCache)
+        public Container()
+            : this(new ContainerFactory().Create())
         {
-            Guard.Against.Null(() => bus);
-            Guard.Against.Null(() => componentCache);
+        }
 
-            this.bus = bus;
-            this.componentCache = componentCache;
+        private Container(ContainerArguments arguments)
+        {
+            Guard.Against.Null(() => arguments);
+            Guard.Against.Null(() => arguments.MessageBus);
+            Guard.Against.Null(() => arguments.ComponentsCache);
+
+            this.bus = arguments.MessageBus;
+            this.componentsCache = arguments.ComponentsCache;
         }
 
         public IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory)
@@ -53,7 +60,7 @@ namespace Canister.Model
                     ComponentKey = componentType
                 });
 
-            var components = this.componentCache.GetComponents(requestId).First();
+            var components = this.componentsCache.GetComponents(requestId).First();
             this.bus.Send(new EndRequest { RequestId = requestId });
 
             return components;
@@ -70,7 +77,7 @@ namespace Canister.Model
                     ComponentKey = componentType
                 });
 
-            var components = this.componentCache.GetComponents(requestId);
+            var components = this.componentsCache.GetComponents(requestId);
             this.bus.Send(new EndRequest { RequestId = requestId });
 
             return components;

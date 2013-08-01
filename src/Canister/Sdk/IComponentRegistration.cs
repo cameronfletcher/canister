@@ -2,14 +2,15 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister
+namespace Canister.Sdk
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
 
     public interface IComponentRegistration
     {
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "As", Justification = "By design.")]
-        IComponentRegistration As(object[] componentKeys);
+        IComponentRegistration As(Type[] componentTypes);
 
         IComponentRegistration PreserveExistingRegistrations();
     }

@@ -1,14 +1,12 @@
 ﻿namespace Canister.Samples
 {
-    using Canister.Factories;
-
     class Program
     {
         static void Main(string[] args)
         {
-            var container = new ContainerFactory().Create();
+            IContainer container = new Container();
 
-            container.Register(e => new Thing { Name = "first" }).As(new object[] { typeof(IThing), typeof(Thing) });
+            container.Register(e => new Thing { Name = "first" }).As(new[] { typeof(IThing), typeof(Thing) });
             //container.Register(e => new Thing { Name = "second" }).As(new object[] { "new Thing", typeof(Thing) }).PreserveExistingRegistrations();
             //container.Register(e => new Thing { Name = "third" }).As(new[] { "new Thing" });
 

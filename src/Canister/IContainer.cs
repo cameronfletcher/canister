@@ -6,6 +6,7 @@ namespace Canister
 {
     using System;
     using System.Collections.Generic;
+    using Canister.Sdk;
 
     public interface IContainer : IComponentContext
     {

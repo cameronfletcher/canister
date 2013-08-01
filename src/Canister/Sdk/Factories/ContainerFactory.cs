@@ -2,12 +2,10 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Factories
+namespace Canister.Sdk.Factories
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Canister.Model;
-    using Canister.Persistence;
     using Canister.Sdk;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Commands;
@@ -17,15 +15,14 @@ namespace Canister.Factories
     using Canister.Sdk.Persistence;
     using Canister.Sdk.Views;
 
-    
-    public class ContainerFactory
+    internal class ContainerFactory
     {
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "WIP")]
-        public IContainer Create()
+        public ContainerArguments Create()
         {
             var bus = new MessageBus();
 
-            var componentCache = new ComponentsCache();
+            var componentsCache = new ComponentsCache();
             var componentFactoriesCache = new ComponentFactoriesCache();
 
             var snapshotService = new SnapshotService(componentFactoriesCache);
@@ -39,32 +36,31 @@ namespace Canister.Factories
             var endRequestHandler = new EndRequestHandler(requestRepository);
             var preserveExistingRegistrationsHandler = new PreserveExistingRegistrationsHandler(customComponentRegistrationRepository);
             var registerComponentHandler = new CustomRegisterComponentHandler(customComponentRegistrationRepository);
-            //var resolveAllComponentsHandler = new ResolveAllComponentsHandler(componentRegistrationRepository);
+            var resolveAllComponentsHandler = new ResolveAllComponentsHandler(requestRepository, componentResolverService);
             var resolveComponentHandler = new ResolveComponentHandler(requestRepository, componentResolverService);
 
-            // command handlers
             bus.Register<AssignComponentKeys>(assignComponentKeysHandler.Handle);
             bus.Register<BeginRequest>(beginRequestHandler.Handle);
             bus.Register<EndRequest>(endRequestHandler.Handle);
             bus.Register<PreserveExistingRegistrations>(preserveExistingRegistrationsHandler.Handle);
             bus.Register<RegisterComponent>(registerComponentHandler.Handle);
-            //bus.Register<ResolveAllComponents>(message => factoryView.Handle(message));
+            bus.Register<ResolveAllComponents>(resolveAllComponentsHandler.Handle);
             bus.Register<ResolveComponent>(resolveComponentHandler.Handle);
 
-            // views
-            var allComponentFactoriesView = new ComponentFactoriesView(componentFactoriesCache);
-            var componentView = new ComponentsView(componentCache);
+            var componentsView = new ComponentsView(componentsCache);
+            var componentFactoriesView = new ComponentFactoriesView(componentFactoriesCache);
 
-            //bus.Register<ComponentRegistered>(message => factoriesView.Handle(message));
-            //bus.Register<ComponentKeysAssigned>(message => factoriesView.Handle(message));
-            //bus.Register<ExistingRegistrationsPreserved>(message => factoriesView.Handle(message));
-            bus.Register<ComponentRegistered>(allComponentFactoriesView.Handle);
-            bus.Register<ComponentKeysAssigned>(allComponentFactoriesView.Handle);
-            bus.Register<ComponentResolved>(componentView.Handle);
+            bus.Register<ComponentRegistered>(componentFactoriesView.Handle);
+            bus.Register<ComponentKeysAssigned>(componentFactoriesView.Handle);
+            bus.Register<ExistingRegistrationsPreserved>(componentFactoriesView.Handle);
+            bus.Register<ComponentResolved>(componentsView.Handle);
+            bus.Register<RequestEnded>(componentsView.Handle);
 
-            var container = new Container(bus, componentCache);
-
-            return container;
+            return new ContainerArguments
+            {
+                MessageBus = bus,
+                ComponentsCache = componentsCache,
+            };
         }
     }
 }
