@@ -1,0 +1,10 @@
+TODO:
+
+move container factory into SDK
+decide what to do with ContainerArguments? Move to SDK, pass to container as dynamic?
+flatten Canister (not SDK)
+Add additional container extensions eg. auto Factory resolver for constructors with interface params
+
+write tests
+seal handlers?
+move infrastructure

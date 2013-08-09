@@ -15,7 +15,9 @@
             //var things = container.ResolveAll("new Thing");
 
             var thing = container.Resolve(typeof(Thing));
-            var otherThing = container.Resolve(typeof(IThing));
+            var otherThing = container.Resolve<IThing>();
+
+            var allThings = container.ResolveAll<Thing>();
         }
     }
 
