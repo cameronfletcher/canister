@@ -8,9 +8,9 @@ namespace Canister.Sdk.Model
 
     public class SnapshotService : ISnapshotService
     {
-        private readonly ComponentFactoriesCache cache;
+        private readonly IComponentFactoriesCache cache;
 
-        public SnapshotService(ComponentFactoriesCache cache)
+        public SnapshotService(IComponentFactoriesCache cache)
         {
             this.cache = cache;
         }

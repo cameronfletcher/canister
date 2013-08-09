@@ -5,7 +5,6 @@
 namespace Canister.Sdk.Cache
 {
     using System;
-    using System.Collections.Generic;
 
     // TODO (Cameron): There should be tests to cover the expected functionality of an implementation of this interface.
     public interface IComponentsCache

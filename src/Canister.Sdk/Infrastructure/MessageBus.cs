@@ -2,7 +2,7 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Sdk
+namespace Canister.Sdk.Infrastructure
 {
     using System;
     using System.Collections.Generic;

@@ -1,10 +1,10 @@
-﻿namespace Canister.Sdk.Persistence
+﻿namespace Canister.Sdk.Infrastructure
 {
     using System;
     using System.Globalization;
     using Canister.Sdk.Model;
 
-    public class CustomRepository<TKey, TAggregate, TBase> : Repository<TKey, TAggregate>, IRepository<TKey, TBase>
+    public class CustomRepository<TKey, TAggregate, TBase> : DefaultRepository<TKey, TAggregate>, IRepository<TKey, TBase>
         where TAggregate : TBase
         where TBase : Aggregate
     {

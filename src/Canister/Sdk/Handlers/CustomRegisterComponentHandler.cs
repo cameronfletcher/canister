@@ -6,14 +6,14 @@ namespace Canister.Sdk.Handlers
 {
     using System;
     using Canister.Sdk.Commands;
+    using Canister.Sdk.Infrastructure;
     using Canister.Sdk.Model;
-    using Canister.Sdk.Persistence;
 
-    public class CustomRegisterComponentHandler
+    internal class CustomRegisterComponentHandler
     {
-        private readonly IRepository<Guid, ComponentRegistration> repository;
+        private readonly IRepository<Guid, CustomComponentRegistration> repository;
 
-        public CustomRegisterComponentHandler(IRepository<Guid, ComponentRegistration> repository)
+        public CustomRegisterComponentHandler(IRepository<Guid, CustomComponentRegistration> repository)
         {
             Guard.Against.Null(() => repository);
 

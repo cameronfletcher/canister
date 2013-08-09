@@ -5,7 +5,7 @@
     using System.Linq;
     using Canister.Sdk;
 
-    public class CustomComponentRegistration : Canister.Sdk.Model.ComponentRegistration
+    internal class CustomComponentRegistration : Canister.Sdk.Model.ComponentRegistration
     {
         private readonly Type componentType;
 

@@ -6,6 +6,7 @@ namespace Canister.Sdk
 {
     using System;
     using Canister.Sdk.Commands;
+    using Canister.Sdk.Infrastructure;
 
     public class ComponentRegistration : IComponentRegistration
     {

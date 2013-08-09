@@ -13,11 +13,11 @@ namespace Canister.Sdk.Views
     public sealed class ComponentFactoriesView
     {
         private readonly Dictionary<Guid, Component> components = new Dictionary<Guid, Component>();
-        private readonly ComponentFactoriesCache cache;
+        private readonly IComponentFactoriesCache cache;
 
         private int componentRegistrationCount;
 
-        public ComponentFactoriesView(ComponentFactoriesCache cache)
+        public ComponentFactoriesView(IComponentFactoriesCache cache)
         {
             Guard.Against.Null(() => cache);
 

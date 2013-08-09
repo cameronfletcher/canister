@@ -2,7 +2,7 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Sdk.Persistence
+namespace Canister.Sdk.Infrastructure
 {
     using System.Diagnostics.CodeAnalysis;
     using Canister.Sdk.Model;

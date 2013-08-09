@@ -11,6 +11,7 @@ namespace Canister
     using Canister.Sdk;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Commands;
+    using Canister.Sdk.Infrastructure;
 
     public class Container : IContainer
     {
@@ -18,18 +19,18 @@ namespace Canister
         private readonly IComponentsCache componentsCache;
 
         public Container()
-            : this(new ContainerFactory().Create())
+            : this(new CustomContainerDependenciesFactory().Create())
         {
         }
 
-        private Container(ContainerArguments arguments)
+        private Container(ContainerDependencies dependencies)
         {
-            Guard.Against.Null(() => arguments);
-            Guard.Against.Null(() => arguments.MessageBus);
-            Guard.Against.Null(() => arguments.ComponentsCache);
+            Guard.Against.Null(() => dependencies);
+            Guard.Against.Null(() => dependencies.Bus);
+            Guard.Against.Null(() => dependencies.ComponentsCache);
 
-            this.bus = arguments.MessageBus;
-            this.componentsCache = arguments.ComponentsCache;
+            this.bus = dependencies.Bus;
+            this.componentsCache = dependencies.ComponentsCache;
         }
 
         public IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory)

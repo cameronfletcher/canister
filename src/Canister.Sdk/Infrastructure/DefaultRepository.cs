@@ -1,15 +1,15 @@
-﻿// <copyright file="Repository.cs" company="Canister contributors">
+﻿// <copyright file="DefaultRepository.cs" company="Canister contributors">
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Sdk.Persistence
+namespace Canister.Sdk.Infrastructure
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using Canister.Sdk.Model;
 
-    public class Repository<TKey, TAggregate> : IRepository<TKey, TAggregate>
+    public class DefaultRepository<TKey, TAggregate> : IRepository<TKey, TAggregate>
         where TAggregate : Aggregate
     {
         private readonly Dictionary<TKey, TAggregate> store = new Dictionary<TKey, TAggregate>();
@@ -17,7 +17,7 @@ namespace Canister.Sdk.Persistence
         private readonly MessageBus bus;
         private readonly Func<TAggregate, TKey> naturalKeyFunction;
 
-        public Repository(MessageBus bus, Func<TAggregate, TKey> naturalKeyFunction)
+        public DefaultRepository(MessageBus bus, Func<TAggregate, TKey> naturalKeyFunction)
         {
             Guard.Against.Null(() => bus);
             Guard.Against.Null(() => naturalKeyFunction);

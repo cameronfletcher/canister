@@ -6,8 +6,8 @@ namespace Canister.Sdk.Handlers
 {
     using System;
     using Canister.Sdk.Commands;
+    using Canister.Sdk.Infrastructure;
     using Canister.Sdk.Model;
-    using Canister.Sdk.Persistence;
 
     public class ResolveComponentHandler
     {
