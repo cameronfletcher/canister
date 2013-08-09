@@ -7,10 +7,15 @@ namespace Canister.Sdk.Cache
     using System;
     using System.Collections.Generic;
 
+    // TODO (Cameron): There should be tests to cover the expected functionality of an implementation of this interface.
     public interface IComponentsCache
     {
+        // do not throw - return empty array if none
         object[] GetComponents(Guid requestId);
 
-        void SetComponents(Guid requestId, object[] components);
+        void PutComponents(Guid requestId, object[] components);
+
+        // do not throw
+        void DeleteComponents(Guid requestId);
     }
 }

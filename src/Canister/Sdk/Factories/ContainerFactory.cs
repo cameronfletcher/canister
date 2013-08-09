@@ -28,14 +28,15 @@ namespace Canister.Sdk.Factories
             var snapshotService = new SnapshotService(componentFactoriesCache);
             var componentResolverService = new ComponentResolverService();
 
-            var customComponentRegistrationRepository = new CustomComponentRegistrationRepository(bus);
             var requestRepository = new Repository<Guid, Request>(bus, request => request.Id);
+            var componentRegistrationRepository =
+                new CustomRepository<Guid, CustomComponentRegistration, Canister.Sdk.Model.ComponentRegistration>(bus, registration => registration.Id);
 
-            var assignComponentKeysHandler = new AssignComponentKeysHandler(customComponentRegistrationRepository);
+            var assignComponentKeysHandler = new AssignComponentKeysHandler(componentRegistrationRepository);
             var beginRequestHandler = new BeginRequestHandler(requestRepository, snapshotService);
             var endRequestHandler = new EndRequestHandler(requestRepository);
-            var preserveExistingRegistrationsHandler = new PreserveExistingRegistrationsHandler(customComponentRegistrationRepository);
-            var registerComponentHandler = new CustomRegisterComponentHandler(customComponentRegistrationRepository);
+            var preserveExistingRegistrationsHandler = new PreserveExistingRegistrationsHandler(componentRegistrationRepository);
+            var registerComponentHandler = new CustomRegisterComponentHandler(componentRegistrationRepository);
             var resolveAllComponentsHandler = new ResolveAllComponentsHandler(requestRepository, componentResolverService);
             var resolveComponentHandler = new ResolveComponentHandler(requestRepository, componentResolverService);
 

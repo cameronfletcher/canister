@@ -11,14 +11,14 @@ namespace Canister.Sdk.Handlers
 
     public class RegisterComponentHandler
     {
+        private readonly IRepository<Guid, ComponentRegistration> repository;
+
         public RegisterComponentHandler(IRepository<Guid, ComponentRegistration> repository)
         {
             Guard.Against.Null(() => repository);
 
-            this.Repository = repository;
+            this.repository = repository;
         }
-
-        protected IRepository<Guid, ComponentRegistration> Repository { get; private set; }
 
         public virtual void Handle(RegisterComponent command)
         {
@@ -29,7 +29,7 @@ namespace Canister.Sdk.Handlers
                 command.ComponentKey, 
                 command.ComponentFactory);
             
-            this.Repository.Save(componentRegistration);
+            this.repository.Save(componentRegistration);
         }
     }
 }

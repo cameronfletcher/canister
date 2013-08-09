@@ -16,9 +16,17 @@ namespace Canister.Sdk.Cache
             return this.cache.ContainsKey(requestId) ? this.cache[requestId] : new object[0];
         }
 
-        public void SetComponents(Guid requestId, object[] components)
+        public void PutComponents(Guid requestId, object[] components)
         {
             this.cache[requestId] = components;
+        }
+
+        public void DeleteComponents(Guid requestId)
+        {
+            if (this.cache.ContainsKey(requestId))
+            {
+                this.cache.Remove(requestId);
+            }
         }
     }
 }

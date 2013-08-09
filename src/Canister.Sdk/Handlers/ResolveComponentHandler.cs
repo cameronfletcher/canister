@@ -11,26 +11,25 @@ namespace Canister.Sdk.Handlers
 
     public class ResolveComponentHandler
     {
+        private readonly IRepository<Guid, Request> repository;
+        private readonly IComponentResolverService componentResolverService;
+
         public ResolveComponentHandler(IRepository<Guid, Request> requestRepository, IComponentResolverService componentResolverService)
         {
             Guard.Against.Null(() => requestRepository);
             Guard.Against.Null(() => componentResolverService);
 
-            this.Repository = requestRepository;
-            this.ComponentResolverService = componentResolverService;
+            this.repository = requestRepository;
+            this.componentResolverService = componentResolverService;
         }
-
-        protected IRepository<Guid, Request> Repository { get; private set; }
-
-        protected IComponentResolverService ComponentResolverService { get; private set; }
 
         public virtual void Handle(ResolveComponent command)
         {
             Guard.Against.Null(() => command);
 
-            var request = this.Repository.Get(command.RequestId);
-            request.Resolve(command.ComponentKey, this.ComponentResolverService);
-            this.Repository.Save(request);
+            var request = this.repository.Get(command.RequestId);
+            request.Resolve(command.ComponentKey, this.componentResolverService);
+            this.repository.Save(request);
         }
     }
 }

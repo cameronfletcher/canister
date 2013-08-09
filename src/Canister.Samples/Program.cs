@@ -6,7 +6,8 @@
         {
             IContainer container = new Container();
 
-            container.Register(e => new Thing { Name = "first" }).As(new[] { typeof(IThing), typeof(Thing) });
+            container.Register(e => new Thing { Name = "first" });
+            container.Register(e => new Thing { Name = "second" }).As(new[] { typeof(IThing), typeof(Thing) }).PreserveExistingRegistrations();
             //container.Register(e => new Thing { Name = "second" }).As(new object[] { "new Thing", typeof(Thing) }).PreserveExistingRegistrations();
             //container.Register(e => new Thing { Name = "third" }).As(new[] { "new Thing" });
 

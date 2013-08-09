@@ -11,6 +11,9 @@ namespace Canister.Sdk.Handlers
 
     public class ResolveAllComponentsHandler
     {
+        private readonly IRepository<Guid, Request> Repository;
+        private readonly IComponentResolverService ComponentResolverService;
+
         public ResolveAllComponentsHandler(IRepository<Guid, Request> requestRepository, IComponentResolverService componentResolverService)
         {
             Guard.Against.Null(() => requestRepository);
@@ -19,10 +22,6 @@ namespace Canister.Sdk.Handlers
             this.Repository = requestRepository;
             this.ComponentResolverService = componentResolverService;
         }
-
-        protected IRepository<Guid, Request> Repository { get; private set; }
-
-        protected IComponentResolverService ComponentResolverService { get; private set; }
 
         public virtual void Handle(ResolveAllComponents command)
         {

@@ -11,22 +11,22 @@ namespace Canister.Sdk.Handlers
 
     public class PreserveExistingRegistrationsHandler
     {
+        private readonly IRepository<Guid, ComponentRegistration> repository;
+
         public PreserveExistingRegistrationsHandler(IRepository<Guid, ComponentRegistration> repository)
         {
             Guard.Against.Null(() => repository);
 
-            this.Repository = repository;
+            this.repository = repository;
         }
 
-        protected IRepository<Guid, ComponentRegistration> Repository { get; private set; }
-
-        public virtual void Handle(PreserveExistingRegistrations command)
+        public void Handle(PreserveExistingRegistrations command)
         {
             Guard.Against.Null(() => command);
 
-            var componentRegistration = this.Repository.Get(command.ComponentRegistrationId);
+            var componentRegistration = this.repository.Get(command.ComponentRegistrationId);
             componentRegistration.PreserveExistingRegistrations();
-            this.Repository.Save(componentRegistration);
+            this.repository.Save(componentRegistration);
         }
     }
 }

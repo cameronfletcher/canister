@@ -85,6 +85,7 @@
     <Compile Include="Model\Request.cs" />
     <Compile Include="Model\Snapshot.cs" />
     <Compile Include="Model\SnapshotService.cs" />
+    <Compile Include="Persistence\CustomRepository.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

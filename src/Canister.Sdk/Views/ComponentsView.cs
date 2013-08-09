@@ -24,15 +24,14 @@ namespace Canister.Sdk.Views
             Guard.Against.Null(() => @event);
 
             var components = this.cache.GetComponents(@event.RequestId);
-            this.cache.SetComponents(@event.RequestId, components.Union(new[] { @event.Component }).ToArray());
+            this.cache.PutComponents(@event.RequestId, components.Concat(new[] { @event.Component }).ToArray());
         }
 
         public void Handle(RequestEnded @event)
         {
             Guard.Against.Null(() => @event);
 
-            // TODO (Cameron): This. Properly.
-            this.cache.SetComponents(@event.RequestId, null);
+            this.cache.DeleteComponents(@event.RequestId);
         }
     }
 }

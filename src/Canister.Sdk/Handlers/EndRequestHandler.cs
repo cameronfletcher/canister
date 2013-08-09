@@ -11,22 +11,22 @@ namespace Canister.Sdk.Handlers
 
     public class EndRequestHandler
     {
+        private readonly IRepository<Guid, Request> repository;
+
         public EndRequestHandler(IRepository<Guid, Request> repository)
         {
             Guard.Against.Null(() => repository);
 
-            this.Repository = repository;
+            this.repository = repository;
         }
-
-        protected IRepository<Guid, Request> Repository { get; private set; }
-
-        public virtual void Handle(EndRequest command)
+        
+        public void Handle(EndRequest command)
         {
             Guard.Against.Null(() => command);
 
-            var request = this.Repository.Get(command.RequestId);
+            var request = this.repository.Get(command.RequestId);
             request.End();
-            this.Repository.Save(request);
+            this.repository.Save(request);
         }
     }
 }
