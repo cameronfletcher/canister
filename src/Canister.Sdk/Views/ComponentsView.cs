@@ -29,6 +29,8 @@ namespace Canister.Sdk.Views
 
         public void Handle(RequestEnded @event)
         {
+            Guard.Against.Null(() => @event);
+
             // TODO (Cameron): This. Properly.
             this.cache.SetComponents(@event.RequestId, null);
         }

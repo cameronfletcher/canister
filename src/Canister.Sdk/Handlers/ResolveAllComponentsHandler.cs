@@ -1,4 +1,4 @@
-﻿// <copyright file="ResolveComponentHandler.cs" company="Canister contributors">
+﻿// <copyright file="ResolveAllComponentsHandler.cs" company="Canister contributors">
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 

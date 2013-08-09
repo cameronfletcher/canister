@@ -5,6 +5,7 @@
 namespace Canister.Sdk.Model
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Canister.Sdk.Events;
 
     public class Request : Aggregate
@@ -30,6 +31,7 @@ namespace Canister.Sdk.Model
 
         public Guid Id { get; private set; }
 
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "End", Justification = "By design.")]
         public virtual void End()
         {
             var @event = new RequestEnded
@@ -44,6 +46,8 @@ namespace Canister.Sdk.Model
 
         public void Resolve(object componentKey, IComponentResolverService componentResolverService)
         {
+            Guard.Against.Null(() => componentResolverService);
+
             if (this.hasEnded)
             {
                 throw new ComponentResolutionException();
@@ -62,6 +66,8 @@ namespace Canister.Sdk.Model
 
         public void ResolveAll(object componentKey, IComponentResolverService componentResolverService)
         {
+            Guard.Against.Null(() => componentResolverService);
+
             if (this.hasEnded)
             {
                 throw new ComponentResolutionException();

@@ -11,9 +11,9 @@ namespace Canister.Sdk.Cache
     {
         private readonly Dictionary<Guid, object[]> cache = new Dictionary<Guid, object[]>();
 
-        public object[] GetComponents(Guid requiestId)
+        public object[] GetComponents(Guid requestId)
         {
-            return this.cache.ContainsKey(requiestId) ? this.cache[requiestId] : new object[0];
+            return this.cache.ContainsKey(requestId) ? this.cache[requestId] : new object[0];
         }
 
         public void SetComponents(Guid requestId, object[] components)

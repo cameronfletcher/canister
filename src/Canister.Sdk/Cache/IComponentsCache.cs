@@ -9,7 +9,7 @@ namespace Canister.Sdk.Cache
 
     public interface IComponentsCache
     {
-        object[] GetComponents(Guid requiestId);
+        object[] GetComponents(Guid requestId);
 
         void SetComponents(Guid requestId, object[] components);
     }

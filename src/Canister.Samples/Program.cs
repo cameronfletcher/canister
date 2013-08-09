@@ -18,7 +18,7 @@
         }
     }
 
-    public class Thing : IThing
+    public class Thing : IThing 
     {
         public string Name { get; set; }
     }

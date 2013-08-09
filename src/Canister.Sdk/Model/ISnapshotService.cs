@@ -4,8 +4,11 @@
 
 namespace Canister.Sdk.Model
 {
+    using System.Diagnostics.CodeAnalysis;
+
     public interface ISnapshotService
     {
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Inappropriate.")]
         Snapshot GetSnapshot();
     }
 }
