@@ -6,23 +6,21 @@ namespace Canister
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Canister.Sdk;
 
-    // TODO (Cameron): Make these more relevant eg. ContainerExtensions, on IComponentContext?
     public static class ContainerExtensions
     {
-        public static T Resolve<T>(this IComponentContext componentContext) // where T : class
+        public static T Resolve<T>(this IComponentResolver componentResolver)
         {
-            Guard.Against.Null(() => componentContext);
+            Guard.Against.Null(() => componentResolver);
 
-            return (T)componentContext.Resolve(typeof(T));
+            return (T)componentResolver.Resolve(typeof(T));
         }
 
-        public static IEnumerable<T> ResolveAll<T>(this IComponentContext componentContext) // where T : class
+        public static IEnumerable<T> ResolveAll<T>(this IComponentResolver componentResolver)
         {
-            Guard.Against.Null(() => componentContext);
+            Guard.Against.Null(() => componentResolver);
 
-            return componentContext.ResolveAll(typeof(T)).Cast<T>();
+            return componentResolver.ResolveAll(typeof(T)).Cast<T>();
         }
     }
 }

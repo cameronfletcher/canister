@@ -46,14 +46,14 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ComponentContext.cs" />
+    <Compile Include="ComponentResolver.cs" />
     <Compile Include="ContainerExtensions.cs" />
     <Compile Include="CustomContainerDependenciesFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="GuardExtensions.cs" />
     <Compile Include="CustomContainerDependencies.cs" />
-    <Compile Include="IComponentContext.cs" />
+    <Compile Include="IComponentResolver.cs" />
     <Compile Include="IComponentRegistration.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="ComponentRegistration.cs" />

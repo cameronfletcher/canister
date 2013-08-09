@@ -1,10 +1,16 @@
 TODO:
 
-move container factory into SDK
-decide what to do with ContainerArguments? Move to SDK, pass to container as dynamic?
-flatten Canister (not SDK)
+TECHNICAL
+ILMerge internal
+Create multiple .NET versions eg. 3.5, 4.0, 4.5 etc.
+Ensure that MessageBus is thread safe and lock where necessary
+
+FUNCTIONAL
 Add additional container extensions eg. auto Factory resolver for constructors with interface params
+Introduce lifetime scope (transient, singleton, per-request)
+Introduce request scope
+Introduce thread scope
+Add releasing of disposable components to include all disposable components within that request
 
 write tests
 seal handlers?
-move infrastructure

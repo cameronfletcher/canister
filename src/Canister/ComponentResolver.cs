@@ -1,14 +1,17 @@
-﻿namespace Canister
+﻿// <copyright file="ComponentResolver.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister
 {
     using System;
     using System.Collections.Generic;
-    using Canister.Sdk;
 
-    internal sealed class ComponentContext : IComponentContext
+    internal sealed class ComponentResolver : IComponentResolver
     {
-        private readonly IComponentResolver resolver;
+        private readonly Canister.Sdk.IComponentResolver resolver;
 
-        public ComponentContext(IComponentResolver resolver)
+        public ComponentResolver(Canister.Sdk.IComponentResolver resolver)
         {
             Guard.Against.Null(() => resolver);
 

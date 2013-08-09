@@ -33,7 +33,7 @@ namespace Canister
             this.componentsCache = dependencies.ComponentsCache;
         }
 
-        public IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory)
+        public IComponentRegistration Register<T>(Func<IComponentResolver, T> componentFactory)
         {
             Guard.Against.Null(() => componentFactory);
 
@@ -44,7 +44,7 @@ namespace Canister
                 {
                     ComponentRegistrationId = componentRegistrationId,
                     ComponentKey = typeof(T),
-                    ComponentFactory = componentResolver => componentFactory.Invoke(new ComponentContext(componentResolver))
+                    ComponentFactory = componentResolver => componentFactory.Invoke(new ComponentResolver(componentResolver))
                 });
 
             return new ComponentRegistration(this.bus, componentRegistrationId);

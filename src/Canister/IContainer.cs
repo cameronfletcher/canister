@@ -5,11 +5,9 @@
 namespace Canister
 {
     using System;
-    using System.Collections.Generic;
-    using Canister.Sdk;
 
-    public interface IContainer : IComponentContext
+    public interface IContainer : IComponentResolver
     {
-        IComponentRegistration Register<T>(Func<IComponentContext, T> componentFactory);
+        IComponentRegistration Register<T>(Func<IComponentResolver, T> componentFactory);
     }
 }
