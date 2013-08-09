@@ -1,9 +1,10 @@
-﻿namespace Canister.Sdk
+﻿namespace Canister
 {
     using System;
     using System.Collections.Generic;
+    using Canister.Sdk;
 
-    public sealed class ComponentContext : IComponentContext
+    internal sealed class ComponentContext : IComponentContext
     {
         private readonly IComponentResolver resolver;
 

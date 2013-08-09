@@ -2,7 +2,7 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Sdk
+namespace Canister
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

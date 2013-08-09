@@ -2,13 +2,13 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Sdk
+namespace Canister
 {
     using System;
     using Canister.Sdk.Commands;
     using Canister.Sdk.Infrastructure;
 
-    public class ComponentRegistration : IComponentRegistration
+    internal class ComponentRegistration : IComponentRegistration
     {
         private readonly MessageBus bus;
         private readonly Guid id;

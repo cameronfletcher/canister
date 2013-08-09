@@ -46,21 +46,21 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Sdk\ComponentContext.cs" />
+    <Compile Include="ComponentContext.cs" />
     <Compile Include="ContainerExtensions.cs" />
-    <Compile Include="Sdk\Factories\CustomContainerDependenciesFactory.cs" />
+    <Compile Include="CustomContainerDependenciesFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="GuardExtensions.cs" />
-    <Compile Include="Sdk\Factories\CustomContainerDependencies.cs" />
-    <Compile Include="Sdk\IComponentContext.cs" />
-    <Compile Include="Sdk\IComponentRegistration.cs" />
+    <Compile Include="CustomContainerDependencies.cs" />
+    <Compile Include="IComponentContext.cs" />
+    <Compile Include="IComponentRegistration.cs" />
     <Compile Include="IContainer.cs" />
-    <Compile Include="Sdk\ComponentRegistration.cs" />
+    <Compile Include="ComponentRegistration.cs" />
     <Compile Include="Container.cs" />
-    <Compile Include="Sdk\Model\CustomComponentRegistration.cs" />
+    <Compile Include="CustomComponentRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sdk\Handlers\CustomRegisterComponentHandler.cs" />
+    <Compile Include="CustomRegisterComponentHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

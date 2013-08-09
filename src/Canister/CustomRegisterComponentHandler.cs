@@ -2,12 +2,11 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Sdk.Handlers
+namespace Canister
 {
     using System;
     using Canister.Sdk.Commands;
     using Canister.Sdk.Infrastructure;
-    using Canister.Sdk.Model;
 
     internal class CustomRegisterComponentHandler
     {

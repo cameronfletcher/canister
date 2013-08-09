@@ -1,4 +1,4 @@
-﻿namespace Canister.Sdk.Model
+﻿namespace Canister
 {
     using System;
     using System.Collections.Generic;

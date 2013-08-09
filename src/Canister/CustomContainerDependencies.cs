@@ -1,9 +1,8 @@
-﻿namespace Canister.Sdk.Factories
+﻿namespace Canister
 {
     using System;
-    using Canister.Sdk.Handlers;
+    using Canister.Sdk.Factories;
     using Canister.Sdk.Infrastructure;
-    using Canister.Sdk.Model;
 
     internal class CustomContainerDependencies : ContainerDependencies
     {

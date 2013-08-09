@@ -2,14 +2,13 @@
 //  Copyright (c) Canister contributors. All rights reserved.
 // </copyright>
 
-namespace Canister.Sdk.Factories
+namespace Canister
 {
     using System;
     using Canister.Sdk.Commands;
-    using Canister.Sdk.Handlers;
+    using Canister.Sdk.Factories;
     using Canister.Sdk.Infrastructure;
-    using Canister.Sdk.Model;
-    using ComponentRegistration = Canister.Sdk.Model.ComponentRegistration;
+    using ComponentRegistrationAggregate = Canister.Sdk.Model.ComponentRegistration;
 
     internal class CustomContainerDependenciesFactory : ContainerDependenciesFactory
     {
@@ -24,7 +23,7 @@ namespace Canister.Sdk.Factories
 
             var customDependencies = Convert(dependencies);
 
-            var repository = new CustomRepository<Guid, CustomComponentRegistration, ComponentRegistration>(dependencies.Bus, registration => registration.Id);
+            var repository = new CustomRepository<Guid, CustomComponentRegistration, ComponentRegistrationAggregate>(dependencies.Bus, registration => registration.Id);
 
             customDependencies.CustomComponentRegistrationRepository = repository;
             customDependencies.ComponentRegistrationRepository = repository;
@@ -36,8 +35,8 @@ namespace Canister.Sdk.Factories
 
             var customDependencies = Convert(dependencies);
 
-            customDependencies.CustomRegisterComponentHandler = new CustomRegisterComponentHandler(customDependencies.CustomComponentRegistrationRepository);
             customDependencies.RegisterComponentHandler = null;
+            customDependencies.CustomRegisterComponentHandler = new CustomRegisterComponentHandler(customDependencies.CustomComponentRegistrationRepository);
         }
 
         protected override void WireUpHandlers(ContainerDependencies dependencies)
