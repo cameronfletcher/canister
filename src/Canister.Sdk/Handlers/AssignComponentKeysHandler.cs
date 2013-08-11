@@ -5,6 +5,7 @@
 namespace Canister.Sdk.Handlers
 {
     using System;
+    using System.Diagnostics;
     using Canister.Sdk.Commands;
     using Canister.Sdk.Infrastructure;
     using Canister.Sdk.Model;

@@ -94,6 +94,7 @@
     <Compile Include="Infrastructure\MessageBus.cs" />
     <Compile Include="Views\ComponentFactoriesView.cs" />
     <Compile Include="Views\ComponentsView.cs" />
+    <Compile Include="Views\LogsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

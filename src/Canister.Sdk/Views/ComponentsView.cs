@@ -8,7 +8,7 @@ namespace Canister.Sdk.Views
     using Canister.Sdk.Cache;
     using Canister.Sdk.Events;
 
-    public sealed class ComponentsView
+    public class ComponentsView
     {
         private readonly IComponentsCache cache;
 

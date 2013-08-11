@@ -80,6 +80,7 @@ namespace Canister.Sdk.Factories
 
             dependencies.ComponentsView = new ComponentsView(dependencies.ComponentsCache);
             dependencies.ComponentFactoriesView = new ComponentFactoriesView(dependencies.ComponentFactoriesCache);
+            dependencies.LogsView = new LogsView(Console.Out);
         }
 
         protected virtual void WireUpHandlers(ContainerDependencies dependencies)
@@ -119,6 +120,14 @@ namespace Canister.Sdk.Factories
             bus.Register<ExistingRegistrationsPreserved>(dependencies.ComponentFactoriesView.Handle);
             bus.Register<ComponentResolved>(dependencies.ComponentsView.Handle);
             bus.Register<RequestEnded>(dependencies.ComponentsView.Handle);
+
+            // logging
+            bus.Register<ComponentKeysAssigned>(dependencies.LogsView.Handle);
+            bus.Register<ComponentRegistered>(dependencies.LogsView.Handle);
+            bus.Register<ComponentResolved>(dependencies.LogsView.Handle);
+            bus.Register<ExistingRegistrationsPreserved>(dependencies.LogsView.Handle);
+            bus.Register<RequestEnded>(dependencies.LogsView.Handle);
+            bus.Register<RequestStarted>(dependencies.LogsView.Handle);
         }
     }
 }

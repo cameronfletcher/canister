@@ -1,17 +1,30 @@
 TODO:
 
 TECHNICAL
-ILMerge internal
-Create multiple .NET versions eg. 3.5, 4.0, 4.5 etc.
+
+v0.2
 Ensure that MessageBus is thread safe and lock where necessary
 
+v0.3
+ILMerge internal
+
+v0.4
+Create multiple .NET versions eg. 3.5, 4.0, 4.5 etc.
+
 FUNCTIONAL
-Add additional container extensions eg. auto Factory resolver for constructors with interface params
+
+v0.2
+Impose a configurable recursion depth limit to avoid StackOverflow on cyclic dependencies
+Decide on behaviour for ResolveAll<T> in implicit registration eg. IEnumerable<T>? - NONE ... document!
+Add logging. Use special logging from Minibus? Only log in view?
+write tests
+
+v0.3
 Introduce lifetime scope (transient, singleton, per-request)
 Introduce request scope
-Introduce thread scope
-Add releasing of disposable components to include all disposable components within that request
-Impose a configurable recursion depth limit to avoid StackOverflow on cyclic dependencies
 
-write tests
-seal handlers?
+v0.4
+Add releasing of disposable components to include all disposable components within that request
+
+v0.5
+Introduce thread scope

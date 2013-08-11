@@ -10,7 +10,7 @@ namespace Canister.Sdk.Views
     using Canister.Sdk.Cache;
     using Canister.Sdk.Events;
 
-    public sealed class ComponentFactoriesView
+    public class ComponentFactoriesView
     {
         private readonly Dictionary<Guid, Component> components = new Dictionary<Guid, Component>();
         private readonly IComponentFactoriesCache cache;

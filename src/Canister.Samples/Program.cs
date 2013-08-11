@@ -33,7 +33,7 @@ namespace Canister.Samples
 
     public class SwampThing : IThing
     {
-        public SwampThing(IThing thing)
+        public SwampThing(Thing thing)
         {
             this.Thing = thing;
         }

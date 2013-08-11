@@ -42,5 +42,6 @@ namespace Canister.Sdk.Factories
         // views
         public ComponentsView ComponentsView { get; set; }
         public ComponentFactoriesView ComponentFactoriesView { get; set; }
+        public LogsView LogsView { get; set; }
     }
 }
