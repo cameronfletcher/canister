@@ -1,12 +1,18 @@
-﻿namespace Canister.Sdk.Factories
+﻿// <copyright file="ContainerDependencies.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Sdk.Factories
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Handlers;
     using Canister.Sdk.Infrastructure;
     using Canister.Sdk.Model;
     using Canister.Sdk.Views;
 
+    [SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1516:ElementsMustBeSeparatedByBlankLine", Justification = "For readability.")]
     public class ContainerDependencies
     {
         // bus

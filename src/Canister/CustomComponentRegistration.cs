@@ -6,6 +6,7 @@ namespace Canister
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using Canister.Sdk;
 
@@ -28,10 +29,17 @@ namespace Canister
                 throw new ComponentRegistrationException("Invalid key type.");
             }
 
-            if (componentKeys.Cast<Type>().Any(componentKey => !componentKey.IsAssignableFrom(componentType)))
+            var firstUnassignableComponentType = componentKeys.Cast<Type>()
+                .FirstOrDefault(componentKey => !componentKey.IsAssignableFrom(this.componentType));
+            
+            if (firstUnassignableComponentType != null)
             {
-                // TODO (Cameron): Fix exception message.
-                throw new ComponentRegistrationException("Cannot assign component type to original component type.");
+                throw new ComponentRegistrationException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Cannot register type of {0} as type of {1}.",
+                        this.componentType.Name,
+                        firstUnassignableComponentType.Name));
             }
 
             base.AssignComponentKeys(componentKeys);

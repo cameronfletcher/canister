@@ -7,10 +7,9 @@ namespace Canister
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Canister.Sdk.Factories;
-    using Canister.Sdk;
     using Canister.Sdk.Cache;
     using Canister.Sdk.Commands;
+    using Canister.Sdk.Factories;
     using Canister.Sdk.Infrastructure;
 
     public class Container : IContainer

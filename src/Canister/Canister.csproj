@@ -63,6 +63,9 @@
     <Compile Include="CustomRegisterComponentHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerExtensions.ComponentResolver.cs">
+      <DependentUpon>ContainerExtensions.cs</DependentUpon>
+    </Compile>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

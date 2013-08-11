@@ -1,4 +1,6 @@
-﻿namespace Canister.Samples
+﻿using System;
+using System.Linq.Expressions;
+namespace Canister.Samples
 {
     class Program
     {
@@ -8,7 +10,8 @@
 
             container.Register(e => new Thing { Name = "first" });
             container.Register(e => new Thing { Name = "second" }).As(new[] { typeof(IThing), typeof(Thing) }).PreserveExistingRegistrations();
-            container.Register(r => new SwampThing(r.Resolve<Thing>())).AsImplementedInterfaces();
+            //container.Register(r => new SwampThing((IThing)r.Resolve(typeof(IThing)))).AsImplementedInterfaces();
+            container.Register<SwampThing>().AsImplementedInterfaces();
             //container.Register(e => new Thing { Name = "second" }).As(new object[] { "new Thing", typeof(Thing) }).PreserveExistingRegistrations();
             //container.Register(e => new Thing { Name = "third" }).As(new[] { "new Thing" });
 

@@ -5,6 +5,8 @@
 namespace Canister
 {
     using System;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
 
     public interface IContainer : IComponentResolver
     {

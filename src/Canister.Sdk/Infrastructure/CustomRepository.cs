@@ -1,4 +1,8 @@
-﻿namespace Canister.Sdk.Infrastructure
+﻿// <copyright file="CustomRepository.cs" company="Canister contributors">
+//  Copyright (c) Canister contributors. All rights reserved.
+// </copyright>
+
+namespace Canister.Sdk.Infrastructure
 {
     using System;
     using System.Globalization;

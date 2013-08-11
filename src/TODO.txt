@@ -11,6 +11,7 @@ Introduce lifetime scope (transient, singleton, per-request)
 Introduce request scope
 Introduce thread scope
 Add releasing of disposable components to include all disposable components within that request
+Impose a configurable recursion depth limit to avoid StackOverflow on cyclic dependencies
 
 write tests
 seal handlers?
