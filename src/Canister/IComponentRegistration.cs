@@ -12,6 +12,8 @@ namespace Canister
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "As", Justification = "By design.")]
         IComponentRegistration As(Type[] componentTypes);
 
+        IComponentRegistration AsImplementedInterfaces();
+
         IComponentRegistration PreserveExistingRegistrations();
     }
 }

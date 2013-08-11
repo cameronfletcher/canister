@@ -10,6 +10,7 @@ namespace Canister.Sdk
     /// <summary>
     /// The exception that is thrown when there is a problem resolving a component.
     /// </summary>
+    //// TODO (Cameron): Fix exception. Add component key value (object)..
     [Serializable]
     public class ComponentResolutionException : Exception
     {

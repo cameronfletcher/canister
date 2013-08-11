@@ -5,6 +5,7 @@
 namespace Canister.Sdk.Model
 {
     using System.Collections.Generic;
+    using System.Globalization;
 
     public class ComponentResolver : IComponentResolver
     {
@@ -24,8 +25,12 @@ namespace Canister.Sdk.Model
             var componentFactory = this.snapshot.GetComponentFactory(componentKey);
             if (componentFactory == null)
             {
-                // TODO (Cameron): Fix exception.
-                throw new ComponentResolutionException("Cannot resolve!");
+                throw new ComponentResolutionException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Cannot resolve the component with the key {0} (of type {1}) as a registration does not exist in the container.",
+                        componentKey.ToString(),
+                        componentKey.GetType().Name));
             }
 
             var component = componentFactory.Invoke(this);
@@ -34,18 +39,12 @@ namespace Canister.Sdk.Model
             return component;
         }
 
+        // TODO (Cameron): Do we want to defer execution here?
         public IEnumerable<object> ResolveAll(object componentKey)
         {
             Guard.Against.Null(() => componentKey);
 
-            var componentFactories = this.snapshot.GetComponentFactories(componentKey);
-            if (componentFactories == null)
-            {
-                // TODO (Cameron): Fix exception.
-                throw new ComponentResolutionException("Cannot resolve!");
-            }
-
-            foreach (var componentFactory in componentFactories)
+            foreach (var componentFactory in this.snapshot.GetComponentFactories(componentKey))
             {
                 var component = componentFactory.Invoke(this);
 

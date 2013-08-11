@@ -22,7 +22,7 @@ namespace Canister.Sdk.Model
         public ComponentFactory GetComponentFactory(object componentKey)
         {
             var componentFactories = this.GetComponentFactories(componentKey);
-            return componentFactories == null ? null : componentFactories.First();
+            return componentFactories == null ? null : componentFactories.FirstOrDefault();
         }
 
         public ComponentFactory[] GetComponentFactories(object componentKey)

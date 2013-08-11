@@ -47,7 +47,7 @@ namespace Canister
                     ComponentFactory = componentResolver => componentFactory.Invoke(new ComponentResolver(componentResolver))
                 });
 
-            return new ComponentRegistration(this.bus, componentRegistrationId);
+            return new ComponentRegistration(this.bus, componentRegistrationId, typeof(T));
         }
 
         public object Resolve(Type componentType)
